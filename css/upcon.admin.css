@@ -1,0 +1,39 @@
+/* Register plugin: backend styles */
+.code {
+    font-family: monospace;
+}
+.modal .row, 
+.register-admin .row {
+    margin-bottom: 10px;
+}
+.row.no-gutter > [class*=col-] {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+.register-admin .tab-pane .nav-pills {
+    background: #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px 10px 0 10px;
+}
+.register-admin .tab-pane.no-table {
+    padding: 0 10px;
+    background: #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.register-admin .tab-pane table {
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.register-admin .tab-pane table form {
+    display: inline-block;
+}
