@@ -1,4 +1,8 @@
-/* Register plugin: frontend styles */
-.register-plugin {
+/* UPcon plugin: frontend styles */
+.upcon-plugin {
     display: block;
 }
+.upcon-plugin form label {
+    margin-bottom: 0;
+}
+
