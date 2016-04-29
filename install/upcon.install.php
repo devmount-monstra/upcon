@@ -18,7 +18,7 @@ Table::create(
 		'country',
 		'mobile',
 		'status',
-		'youth',
+		'youthgroup',
 		'safecom_visited',
 		'arrival',
 		'message',
@@ -27,5 +27,5 @@ Table::create(
 );
 
 // Add Options
-// Option::add('events_image_directory', '/');
-// Option::add('events_audio_directory', '/');
+// Option::add('upcon_title', '');
+// Option::add('upcon_id', '/');
