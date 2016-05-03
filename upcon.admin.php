@@ -4,7 +4,7 @@
 defined('MONSTRA_ACCESS') or die('No direct script access.');
 
 /**
- *	Register plugin admin
+ *	UPcon plugin admin
  *
  *  Provides forms for registration
  *
@@ -12,25 +12,25 @@ defined('MONSTRA_ACCESS') or die('No direct script access.');
  *  @subpackage Plugins
  *	@author     Andreas Müller | devmount <mail@devmount.de>
  *	@license    MIT
- *  @link       https://github.com/devmount-monstra/register
+ *  @link       https://github.com/devmount-monstra/upcon
  *
  */
 
 // Add plugin styles and scripts
-Stylesheet::add('plugins/register/css/register.admin.css', 'backend', 11);
-Javascript::add('plugins/register/js/register.admin.js', 'backend', 11);
+Stylesheet::add('plugins/upcon/css/upcon.admin.css', 'backend', 11);
+Javascript::add('plugins/upcon/js/upcon.admin.js', 'backend', 11);
 
 // Admin Navigation: add new item
-Navigation::add(__('Register', 'register'), 'content', 'register', 10);
+Navigation::add(__('UPcon', 'upcon'), 'content', 'upcon', 10);
 
 // Add action on admin_pre_render hook
-Action::add('admin_pre_render','RegisterAdmin::_getAjaxData');
+Action::add('admin_pre_render','UPconAdmin::_getAjaxData');
 
 /**
- * Register class
+ * UPcon class
  *
  */
-class RegisterAdmin extends Backend
+class UPconAdmin extends Backend
 {
     /**
      * Ajax: get Event by ID
@@ -39,8 +39,8 @@ class RegisterAdmin extends Backend
     {
         // Ajax Request: add event
         if (Request::post('edit_event_id')) {
-            $register = new Table('register');
-            echo json_encode($register->select('[id=' . Request::post('edit_event_id') . ']')[0]);
+            $upcon = new Table('upcon');
+            echo json_encode($upcon->select('[id=' . Request::post('edit_event_id') . ']')[0]);
             Request::shutdown();
         }
         // Ajax Request: add category
@@ -52,18 +52,18 @@ class RegisterAdmin extends Backend
     }
 
     /**
-     * main register admin function
+     * main upcon admin function
      */
     public static function main()
     {
         // get db table objects
-        $register = new Table('register');
+        $upcon = new Table('upcon');
         $categories = new Table('categories');
 
         // Request: add event
         if (Request::post('add_event')) {
             if (Security::check(Request::post('csrf'))) {
-                $register->insert(
+                $upcon->insert(
                     array(
                         'title' => (string) Request::post('event_title'),
                         'timestamp' => strtotime(Request::post('event_timestamp')),
@@ -84,40 +84,40 @@ class RegisterAdmin extends Backend
                         'color' => (string) Request::post('event_color'),
                     )
                 );
-                Notification::set('success', __('Event was added with success!', 'register'));
-                Request::redirect('index.php?id=register#register/' . RegisterAdmin::eventStatus(strtotime(Request::post('event_timestamp'))) . '-register');
+                Notification::set('success', __('Event was added with success!', 'upcon'));
+                Request::redirect('index.php?id=upcon#upcon/' . UPconAdmin::eventStatus(strtotime(Request::post('event_timestamp'))) . '-upcon');
             }
             else {
-                Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'register'));
+                Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'upcon'));
                 die();
             }
         }
 
         // Request: options
-        if (Request::post('register_options')) {
+        if (Request::post('upcon_options')) {
             if (Security::check(Request::post('csrf'))) {
-                Option::update('register_image_directory', Request::post('register_image_directory'));
-                Notification::set('success', __('Configuration has been saved with success!', 'register'));
-                Request::redirect('index.php?id=register#configuration');
+                Option::update('upcon_image_directory', Request::post('upcon_image_directory'));
+                Notification::set('success', __('Configuration has been saved with success!', 'upcon'));
+                Request::redirect('index.php?id=upcon#configuration');
             }
             else {
-                Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'register'));
+                Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'upcon'));
                 die();
             }
         }
 
         // Display view
-        View::factory('register/views/backend/index')
+        View::factory('upcon/views/backend/index')
             ->assign('categories', $activecategories)
             ->assign('deletedcategories', $deletedcategories)
             ->assign('categories_title', $categories_title)
             ->assign('categories_active_title', $categories_active_title)
             ->assign('categories_color', $categories_color)
             ->assign('categories_count', $categories_count)
-            ->assign('upcomingregister', $upcomingregister)
-            ->assign('pastregister', $pastregister)
-            ->assign('deletedregister', $deletedregister)
-            ->assign('draftregister', $draftregister)
+            ->assign('upcomingupcon', $upcomingupcon)
+            ->assign('pastupcon', $pastupcon)
+            ->assign('deletedupcon', $deletedupcon)
+            ->assign('draftupcon', $draftupcon)
             ->assign('directories', $directories)
             ->assign('files', $files)
             ->assign('path', $path)
