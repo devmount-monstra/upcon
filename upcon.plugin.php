@@ -153,6 +153,8 @@ class UPcon
      */
     public function registration($id, $title)
     {
+
+        // return view
         return View::factory('upcon/views/frontend/registration')
             ->assign('title', $title)
             ->assign('id', $id)

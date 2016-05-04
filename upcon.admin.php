@@ -109,18 +109,6 @@ class UPconAdmin extends Backend
         // Display view
         View::factory('upcon/views/backend/index')
             ->assign('categories', $activecategories)
-            ->assign('deletedcategories', $deletedcategories)
-            ->assign('categories_title', $categories_title)
-            ->assign('categories_active_title', $categories_active_title)
-            ->assign('categories_color', $categories_color)
-            ->assign('categories_count', $categories_count)
-            ->assign('upcomingupcon', $upcomingupcon)
-            ->assign('pastupcon', $pastupcon)
-            ->assign('deletedupcon', $deletedupcon)
-            ->assign('draftupcon', $draftupcon)
-            ->assign('directories', $directories)
-            ->assign('files', $files)
-            ->assign('path', $path)
             ->display();
     }
 
