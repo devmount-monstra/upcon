@@ -2,8 +2,7 @@
     <h4><?php echo Option::get('upcon_title'); ?></h4>
     <?php echo
         Form::open(Null, array('role' => 'form')) .
-        Form::hidden('csrf', Security::token()) .
-        Form::hidden('upcon_id', Option::get('upcon_id'));
+        Form::hidden('csrf', Security::token());
     ?>
     <div class="row uniform">
         <div class="6u 12u$(xsmall)">

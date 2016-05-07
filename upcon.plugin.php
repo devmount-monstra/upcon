@@ -152,6 +152,44 @@ class UPcon
      */
     public function registration($id, $title)
     {
+        // get db table objects
+        $upcon = new Table('upcon');
+
+        // TODO: Request: add person
+        if (Request::post('add_person')) {
+            if (Security::check(Request::post('csrf'))) {
+                // TODO: check requireds, dateformat, status, terms_accepted
+                $upcon->insert(
+                    array(
+                        'timestamp' => time(),
+                        'deleted' => 0,
+                        'upcon_id' => (string) Option::get('upcon_id'),
+                        'prename' => (string) Request::post('prename'),
+                        'lastname' => (string) Request::post('lastname'),
+                        'gender' => (string) Request::post('gender'),
+                        'birthday' => (string) Request::post('birthday'),
+                        'email' => (string) Request::post('email'),
+                        'address' => (string) Request::post('address'),
+                        'zip' => (string) Request::post('zip'),
+                        'city' => (string) Request::post('city'),
+                        'country' => (string) Request::post('country'),
+                        'mobile' => (string) Request::post('mobile'),
+                        'status' => (int) Request::post('status'),
+                        'youthgroup' => (string) Request::post('youthgroup'),
+                        'safecom_visited' => (int) Request::post('safecom_visited'),
+                        'arrival' => (string) Request::post('arrival'),
+                        'message' => (string) Request::post('message'),
+                        'terms_accepted' => (int) Request::post('terms_accepted'),
+                    )
+                );
+                Notification::set('success', __('Person was added with success!', 'upcon'));
+                Request::redirect('index.php?id=upcon');
+            }
+            else {
+                Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'upcon'));
+                die();
+            }
+        }
 
         // return rendered view
         return View::factory('upcon/views/frontend/registration')
