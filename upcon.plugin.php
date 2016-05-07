@@ -110,7 +110,6 @@ class UPcon
         switch ($attributes['show']) {
             case 'registration':
                 return UPcon::registration($attributes['id'], $attributes['title']);
-                // return 'test';
                 break;
 
             default:
@@ -154,7 +153,7 @@ class UPcon
     public function registration($id, $title)
     {
 
-        // return view
+        // return rendered view
         return View::factory('upcon/views/frontend/registration')
             ->assign('title', $title)
             ->assign('id', $id)
@@ -182,7 +181,7 @@ class UPcon
      */
     public function error()
     {
-        return 'error occured';
+        return 'Ooops, an error occured...';
     }
 
 

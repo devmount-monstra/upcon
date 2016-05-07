@@ -6,7 +6,7 @@ defined('MONSTRA_ACCESS') or die('No direct script access.');
 /**
  *	UPcon plugin admin
  *
- *  Provides forms for registration
+ *  Provides a list of all registered records and some statistics
  *
  *	@package    Monstra
  *  @subpackage Plugins
@@ -37,16 +37,10 @@ class UPconAdmin extends Backend
      */
     public static function _getAjaxData()
     {
-        // Ajax Request: add event
-        if (Request::post('edit_event_id')) {
-            $upcon = new Table('upcon');
-            echo json_encode($upcon->select('[id=' . Request::post('edit_event_id') . ']')[0]);
-            Request::shutdown();
-        }
-        // Ajax Request: add category
-        if (Request::post('edit_category_id')) {
-            $categories = new Table('categories');
-            echo json_encode($categories->select('[id=' . Request::post('edit_category_id') . ']')[0]);
+        // Ajax Request: edit person
+        if (Request::post('edit_person_id')) {
+            $upcon = new Table('upcon_persons');
+            echo json_encode($upcon->select('[id=' . Request::post('edit_person_id') . ']')[0]);
             Request::shutdown();
         }
     }
@@ -58,34 +52,35 @@ class UPconAdmin extends Backend
     {
         // get db table objects
         $upcon = new Table('upcon');
-        $categories = new Table('categories');
 
-        // Request: add event
-        if (Request::post('add_event')) {
+        // Request: add person
+        if (Request::post('add_person')) {
             if (Security::check(Request::post('csrf'))) {
                 $upcon->insert(
                     array(
-                        'title' => (string) Request::post('event_title'),
-                        'timestamp' => strtotime(Request::post('event_timestamp')),
+                        'timestamp' => time(),
                         'deleted' => 0,
-                        'category' => (int) Request::post('event_category'),
-                        'date' => (string) Request::post('event_date'),
-                        'openat' => (string) Request::post('event_openat'),
-                        'time' => (string) Request::post('event_time'),
-                        'location' => (string) Request::post('event_location'),
-                        'address' => (string) Request::post('event_address'),
-                        'short' => (string) Request::post('event_short'),
-                        'description' => (string) Request::post('event_description'),
-                        'hashtag' => (string) Request::post('event_hashtag'),
-                        'facebook' => (string) Request::post('event_facebook'),
-                        'image' => (string) Request::post('event_image'),
-                        'imagesection' => (string) Request::post('event_imagesection'),
-                        'audio' => (string) Request::post('event_audio'),
-                        'color' => (string) Request::post('event_color'),
+                        'upcon_id' => (string) Option::get('upcon_id'),
+                        'prename' => (string) Request::post('prename'),
+                        'lastname' => (string) Request::post('lastname'),
+                        'gender' => (string) Request::post('gender'),
+                        'birthday' => (string) Request::post('birthday'),
+                        'email' => (string) Request::post('email'),
+                        'address' => (string) Request::post('address'),
+                        'zip' => (string) Request::post('zip'),
+                        'city' => (string) Request::post('city'),
+                        'country' => (string) Request::post('country'),
+                        'mobile' => (string) Request::post('mobile'),
+                        'status' => (int) Request::post('status'),
+                        'youthgroup' => (string) Request::post('youthgroup'),
+                        'safecom_visited' => (int) Request::post('safecom_visited'),
+                        'arrival' => (string) Request::post('arrival'),
+                        'message' => (string) Request::post('message'),
+                        'terms_accepted' => (int) Request::post('terms_accepted'),
                     )
                 );
-                Notification::set('success', __('Event was added with success!', 'upcon'));
-                Request::redirect('index.php?id=upcon#upcon/' . UPconAdmin::eventStatus(strtotime(Request::post('event_timestamp'))) . '-upcon');
+                Notification::set('success', __('Person was added with success!', 'upcon'));
+                Request::redirect('index.php?id=upcon');
             }
             else {
                 Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'upcon'));
@@ -96,7 +91,9 @@ class UPconAdmin extends Backend
         // Request: options
         if (Request::post('upcon_options')) {
             if (Security::check(Request::post('csrf'))) {
-                Option::update('upcon_image_directory', Request::post('upcon_image_directory'));
+                Option::update('upcon_title', Request::post('upcon_title'));
+                Option::update('upcon_id', Request::post('upcon_id'));
+                Option::update('upcon_active', Request::post('upcon_active'));
                 Notification::set('success', __('Configuration has been saved with success!', 'upcon'));
                 Request::redirect('index.php?id=upcon#configuration');
             }
@@ -108,7 +105,7 @@ class UPconAdmin extends Backend
 
         // Display view
         View::factory('upcon/views/backend/index')
-            ->assign('categories', $activecategories)
+            ->assign('persons', $upcon->select('all'))
             ->display();
     }
 

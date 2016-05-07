@@ -8,92 +8,92 @@
     <div class="row uniform">
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_prename', __('Vorname', 'upcon') . Html::nbsp() . '*') .
-                Form::input('event_prename', Null, array('required' => 'required'));
+                Form::label('prename', __('Vorname', 'upcon') . Html::nbsp() . '*') .
+                Form::input('prename', Null, array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_lastname', __('Nachname', 'upcon') . Html::nbsp() . '*') .
-                Form::input('event_lastname', Null, array('required' => 'required'));
+                Form::label('lastname', __('Nachname', 'upcon') . Html::nbsp() . '*') .
+                Form::input('lastname', Null, array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_gender', __('Du bist...', 'upcon') . Html::nbsp() . '*') .
-                Form::select('event_gender', $gender, Null, array('required' => 'required'));
+                Form::label('gender', __('Du bist...', 'upcon') . Html::nbsp() . '*') .
+                Form::select('gender', $gender, Null, array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_birthday', __('Geburtstag', 'upcon') . Html::nbsp() . '*') .
-                Form::input('event_birthday', Null, array('required' => 'required'));
+                Form::label('birthday', __('Geburtstag', 'upcon') . Html::nbsp() . '*') .
+                Form::input('birthday', Null, array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_email', __('E-Mail', 'upcon') . Html::nbsp() . '*') .
-                Form::input('event_email', '', array('type' => 'email', 'required' => 'required'));
+                Form::label('email', __('E-Mail', 'upcon') . Html::nbsp() . '*') .
+                Form::input('email', '', array('type' => 'email', 'required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_address', __('Adresse / Hausnummer', 'upcon') . Html::nbsp() . '*') .
-                Form::input('event_address', Null, array('required' => 'required'));
+                Form::label('address', __('Adresse / Hausnummer', 'upcon') . Html::nbsp() . '*') .
+                Form::input('address', Null, array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_zip', __('PLZ', 'upcon')) .
-                Form::input('event_zip', Null);
+                Form::label('zip', __('PLZ', 'upcon')) .
+                Form::input('zip', Null);
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_country', __('Land', 'upcon') . Html::nbsp() . '*') .
-                Form::input('event_country', Null, array('required' => 'required'));
+                Form::label('country', __('Land', 'upcon') . Html::nbsp() . '*') .
+                Form::input('country', Null, array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_mobile', __('Telefon', 'upcon')) .
-                Form::input('event_mobile', Null);
+                Form::label('mobile', __('Telefon', 'upcon')) .
+                Form::input('mobile', Null);
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_status', __('Status', 'upcon') . Html::nbsp() . '*') .
-                Form::select('event_status', $status, Null, array('required' => 'required'));
+                Form::label('status', __('Status', 'upcon') . Html::nbsp() . '*') .
+                Form::select('status', $status, Null, array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_youthgroup', __('Jugendgruppe', 'upcon')) .
-                Form::input('event_youthgroup', Null);
+                Form::label('youthgroup', __('Jugendgruppe', 'upcon')) .
+                Form::input('youthgroup', Null);
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_safecom_visited', __('Sichere Gemeinde besucht (für Mitarbeiter)', 'upcon')) .
-                Form::select('event_safecom_visited', $decision, Null);
+                Form::label('safecom_visited', __('Sichere Gemeinde besucht (für Mitarbeiter)', 'upcon')) .
+                Form::select('safecom_visited', $decision, Null);
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('event_arrival', __('Anreisedatum (für Tagesgäste)', 'upcon')) .
-                Form::input('event_arrival', '');
+                Form::label('arrival', __('Anreisedatum (für Tagesgäste)', 'upcon')) .
+                Form::input('arrival', '');
             ?>
         </div>
         <div class="12u$">
             <?php echo
-                Form::label('event_message', __('Hinweis', 'upcon')) .
-                Form::textarea('event_message', Null, array('class' => 'input-xxlarge', 'placeholder' => __('Essen, Sport, Krankheiten...', 'upcon')));
+                Form::label('message', __('Hinweis', 'upcon')) .
+                Form::textarea('message', Null, array('class' => 'input-xxlarge', 'placeholder' => __('Essen, Sport, Krankheiten...', 'upcon')));
             ?>
         </div>
         <div class="12u$">
             <?php echo
-                Form::label('event_terms_accepted', __('Ich akzeptiere AGB und Datenschutzbedingungen', 'upcon') . Html::nbsp() . '*') .
-                Form::select('event_terms_accepted', $decision, Null, array('required' => 'required'));
+                Form::label('terms_accepted', __('Ich akzeptiere AGB und Datenschutzbedingungen', 'upcon') . Html::nbsp() . '*') .
+                Form::select('terms_accepted', $decision, Null, array('required' => 'required'));
             ?>
         </div>
         <div class="12u$">

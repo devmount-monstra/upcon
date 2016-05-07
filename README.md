@@ -6,7 +6,7 @@ A plugin to provide a form for registration, mail address confirmationm, registr
 ## Version
 #### [**v1.0**](https://github.com/devmount-monstra/upcon/releases/tag/v1.0) - 2016-04-29
 
-Here is a [list of all releases](https://github.com/devmount-monstra/upcon/releases) of `UPcon`
+Here is a [list of all versions](https://github.com/devmount-monstra/upcon/releases) of `UPcon`
 
 ## Installation
 1. Download latest version of `UPcon`

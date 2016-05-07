@@ -7,6 +7,9 @@ defined('MONSTRA_ACCESS') or die('No direct script access.');
 Table::create(
 	'upcon_persons',
 	array(
+		'timestamp',
+		'deleted',
+		'upcon_id',
 		'prename',
 		'lastname',
 		'gender',
@@ -27,5 +30,6 @@ Table::create(
 );
 
 // Add Options
-// Option::add('upcon_title', '');
-// Option::add('upcon_id', '/');
+Option::add('upcon_title', '');
+Option::add('upcon_id', '');
+Option::add('upcon_active', 0);
