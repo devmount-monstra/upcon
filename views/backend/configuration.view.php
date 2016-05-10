@@ -81,7 +81,8 @@
             <?php echo Form::close(); ?>
         </div>
         <div class="col-md-6">
-
+            <?php echo Html::heading(__('Export', 'upcon'), 3); ?>
+            <p>Coming soon...</p>
         </div>
     </div>
 </div>
