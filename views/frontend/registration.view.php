@@ -1,5 +1,4 @@
 <div class="upcon-plugin">
-    <h4><?php echo Option::get('upcon_title'); ?></h4>
     <?php echo
         Form::open(Null, array('role' => 'form')) .
         Form::hidden('csrf', Security::token());

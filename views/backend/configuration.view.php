@@ -31,18 +31,37 @@
                 HTML::br();
             ?>
             <div class="row">
-                <div class="col-md-6">
-                    <!-- config image directory -->
+                <div class="col-md-5">
+                    <!-- config upcon title -->
                     <?php echo
-                        Form::label('upcon_image_directory', __('Image directory for upcon', 'upcon'), array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Existing directory for event images, that will be displayed in the select list of the upcon add/edit form', 'upcon'))) .
-                        Form::select('upcon_image_directory', $directories, Option::get('upcon_image_directory'), array('class' => 'form-control'));
+                        Form::label(
+                            'upcon_title',
+                            __('UPcon Title', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('The custom title for the current UPdate Convention', 'upcon'))
+                        ) .
+                        Form::input('upcon_title', Option::get('upcon_title'), array('class' => 'form-control'));
                     ?>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <!-- config archive description placeholder -->
                     <?php echo
-                        Form::label('upcon_placeholder_archive', __('Archive description field', 'upcon'), array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Custom placeholder text for "Archive description" textarea in the upcon add/edit form', 'upcon'))) .
-                        Form::input('upcon_placeholder_archive', Option::get('upcon_placeholder_archive'), array('class' => 'form-control'));
+                        Form::label(
+                            'upcon_id',
+                            __('UPcon ID', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('The unique custom ID for the current UPdate Convention, e.g. "upcon16" - must be the same as the current UPcon URL slug', 'upcon'))
+                        ) .
+                        Form::input('upcon_id', Option::get('upcon_id'), array('class' => 'form-control'));
+                    ?>
+                </div>
+                <div class="col-md-3">
+                    <!-- config archive description placeholder -->
+                    <?php echo
+                        Form::label(
+                            'upcon_active',
+                            __('UPcon active', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Use this switch to activate the configured UPdate Convention', 'upcon'))
+                        ) .
+                        Form::select('upcon_active', array(0 => __("Inactive", 'upcon'), 1 => __('Active', 'upcon')), Null, array('class' => 'form-control'));
                     ?>
                 </div>
             </div>
