@@ -1,13 +1,10 @@
 /* global $ */
 if (typeof $.monstra == 'undefined') $.monstra = {};
 
-$.monstra.register = {
+$.monstra.upcon = {
 
     /* initialize document ready functions */
 	init: function(){
-        // activate current tab on page reload
-        $.monstra.register.handleTabLinks();
-
         // modal: readme greybox script
         $('.readme-plugin').click(function() {
             $.ajax({
@@ -25,5 +22,5 @@ $.monstra.register = {
 
 // call init
 $(document).ready(function(){
-	$.monstra.register.init();
+	$.monstra.upcon.init();
 });

@@ -153,13 +153,13 @@ class UPcon
     public function registration($id, $title)
     {
         // get db table objects
-        $upcon = new Table('upcon');
+        $persons = new Table('upcon_persons');
 
         // TODO: Request: add person
-        if (Request::post('add_person')) {
+        if (Request::post('upcon_registration_submitted')) {
             if (Security::check(Request::post('csrf'))) {
                 // TODO: check requireds, dateformat, status, terms_accepted
-                $upcon->insert(
+                $persons->insert(
                     array(
                         'timestamp' => time(),
                         'deleted' => 0,
@@ -183,7 +183,7 @@ class UPcon
                     )
                 );
                 Notification::set('success', __('Person was added with success!', 'upcon'));
-                Request::redirect('index.php?id=upcon');
+                Request::redirect(Option::get('upcon_id'));
             }
             else {
                 Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'upcon'));
