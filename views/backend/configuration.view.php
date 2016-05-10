@@ -12,10 +12,10 @@
                 <span class="hidden-sm hidden-xs"><?php echo __('Configuration', 'upcon'); ?></span>
                 <span class="visible-sm visible-xs"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></span>
             </a>
-            <a href="index.php?id=upcon&action=stats" class="btn btn-default">
+<!--             <a href="index.php?id=upcon&action=stats" class="btn btn-default">
                 <span class="hidden-sm hidden-xs"><?php echo __('Stats', 'upcon'); ?></span>
                 <span class="visible-sm visible-xs"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span></span>
-            </a>
+            </a> -->
             <a href="#" class="btn btn-default readme-plugin" title="<?php echo __('Documentation', 'upcon'); ?>" data-toggle="modal" data-target="#modal-documentation" readme-plugin="upcon">
                 <span class="hidden-sm hidden-xs"><?php echo __('Documentation', 'upcon'); ?></span>
                 <span class="visible-sm visible-xs"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></span>
@@ -58,7 +58,7 @@
                     <?php echo
                         Form::label(
                             'upcon_active',
-                            __('UPcon active', 'upcon'),
+                            __('UPcon status', 'upcon'),
                             array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Use this switch to activate the configured UPdate Convention', 'upcon'))
                         ) .
                         Form::select('upcon_active', array(0 => __("Inactive", 'upcon'), 1 => __('Active', 'upcon')), Null, array('class' => 'form-control'));

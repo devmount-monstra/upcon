@@ -26,10 +26,10 @@
                 <span class="hidden-sm hidden-xs"><?php echo __('Configuration', 'upcon'); ?></span>
                 <span class="visible-sm visible-xs"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></span>
             </a>
-            <a href="index.php?id=upcon&action=stats" class="btn btn-default">
+<!--             <a href="index.php?id=upcon&action=stats" class="btn btn-default">
                 <span class="hidden-sm hidden-xs"><?php echo __('Stats', 'upcon'); ?></span>
                 <span class="visible-sm visible-xs"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span></span>
-            </a>
+            </a> -->
             <a href="#" class="btn btn-default readme-plugin" title="<?php echo __('Documentation', 'upcon'); ?>" data-toggle="modal" data-target="#modal-documentation" readme-plugin="upcon">
                 <span class="hidden-sm hidden-xs"><?php echo __('Documentation', 'upcon'); ?></span>
                 <span class="visible-sm visible-xs"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></span>
@@ -40,9 +40,10 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th><?php echo __('Color', 'upcon'); ?></th>
-                <th><?php echo __('Title', 'upcon'); ?></th>
-                <th><?php echo __('Assigned', 'upcon'); ?></th>
+                <th><?php echo __('Name', 'upcon'); ?></th>
+                <th><?php echo __('Birthday', 'upcon'); ?></th>
+                <th><?php echo __('Email', 'upcon'); ?></th>
+                <th><?php echo __('Status', 'upcon'); ?></th>
                 <th></th>
             </tr>
         </thead>
@@ -51,23 +52,19 @@
                 foreach ($persons as $person) { ?>
                     <tr>
                         <td>
-                            test
+                            <?php echo $person['prename'] . ' ' . $person['lastname']; ?>
                         </td>
                         <td>
-                            <?php echo Html::heading('title', 4); ?>
+                            <?php echo $person['birthday']; ?>
                         </td>
                         <td>
-                            test
+                            <?php echo $person['email']; ?>
+                        </td>
+                        <td>
+                            <?php echo $person['status']; ?>
                         </td>
                         <td>
                             <div class="pull-right">
-                                <button
-                                    class="btn btn-primary edit-person"
-                                    value="<?php echo $person['id'] ?>"
-                                    title="<?php echo __('Edit', 'upcon'); ?>"
-                                >
-                                    <?php echo __('Edit', 'upcon'); ?>
-                                </button>
                                 <?php echo
                                     Form::open() .
                                     Form::hidden('csrf', Security::token()) .
@@ -76,7 +73,7 @@
                                     <button
                                         class="btn btn-danger"
                                         value="1"
-                                        onclick="return confirmDelete('<?php echo __('Delete person »:title«', 'upcon', array(':title' => $person['title'])); ?>')"
+                                        onclick="return confirmDelete('<?php echo __('Delete person »:name«', 'upcon', array(':name' => $person['prename'] . ' ' . $person['lastname'])); ?>')"
                                         title="<?php echo __('Delete', 'upcon'); ?>"
                                     >
                                         <?php echo __('Delete', 'upcon'); ?>
