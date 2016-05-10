@@ -5,4 +5,10 @@
 .upcon-plugin form label {
     margin-bottom: 0;
 }
+.upcon-plugin .stacked {
+    padding-top: 0;
+}
+.upcon-plugin .stacked.small-gap {
+    padding-left: .5em;
+}
 

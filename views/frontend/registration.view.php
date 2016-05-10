@@ -24,8 +24,22 @@
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('birthday', __('Geburtstag', 'upcon') . Html::nbsp() . '*') .
-                Form::input('birthday', Null, array('required' => 'required'));
+                Form::label('birthday', __('Geburtstag', 'upcon') . Html::nbsp() . '*');
+            ?>
+        </div>
+        <div class="2u 4u(xsmall) stacked">
+            <?php echo
+                Form::select('birthday_d', array_combine(range(1,31), range(1,31)), Null, array('required' => 'required'));
+            ?>
+        </div>
+        <div class="2u 4u(xsmall) stacked small-gap">
+            <?php echo
+                Form::select('birthday_m', array_combine(range(1,12), array('Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez')), Null, array('required' => 'required'));
+            ?>
+        </div>
+        <div class="2u 4u$(xsmall) stacked small-gap">
+            <?php echo
+                Form::select('birthday_y', array_combine(range(2010,1910), range(2010,1910)), Null, array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
@@ -61,7 +75,7 @@
         <div class="6u 12u$(xsmall)">
             <?php echo
                 Form::label('status', __('Status', 'upcon') . Html::nbsp() . '*') .
-                Form::select('status', $status, Null, array('required' => 'required'));
+                Form::select('status', $status, Null, array('id' => 'upcon-status', 'required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
@@ -70,15 +84,15 @@
                 Form::input('youthgroup', Null);
             ?>
         </div>
-        <div class="6u 12u$(xsmall)">
+        <div class="6u 12u$(xsmall) upcon-staff">
             <?php echo
-                Form::label('safecom_visited', __('Sichere Gemeinde besucht (für Mitarbeiter)', 'upcon')) .
+                Form::label('safecom_visited', __('Sichere Gemeinde besucht', 'upcon')) .
                 Form::select('safecom_visited', $decision, Null);
             ?>
         </div>
-        <div class="6u 12u$(xsmall)">
+        <div class="6u 12u$(xsmall) upcon-guest">
             <?php echo
-                Form::label('arrival', __('Anreisedatum (für Tagesgäste)', 'upcon')) .
+                Form::label('arrival', __('Anreisedatum', 'upcon')) .
                 Form::input('arrival', '');
             ?>
         </div>

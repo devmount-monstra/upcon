@@ -128,7 +128,7 @@ class UPcon
      */
     public static function _insertJS()
     {
-        echo '';
+        echo '<script src="' . Option::get('siteurl') . '/plugins/upcon/js/upcon.plugin.js"></script>';
     }
 
 

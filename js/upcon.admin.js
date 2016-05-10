@@ -5,6 +5,7 @@ $.monstra.upcon = {
 
     /* initialize document ready functions */
 	init: function(){
+
         // modal: readme greybox script
         $('.readme-plugin').click(function() {
             $.ajax({
