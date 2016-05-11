@@ -1,3 +1,8 @@
+<!-- notifications -->
+<?php if (Notification::get('success')) { ?><div class="notification notification-success"><?php echo Notification::get('success'); ?></div><?php } ?>
+<?php if (Notification::get('error')) { ?><div class="notification notification-error"><?php echo Notification::get('error'); ?></div><?php } ?>
+
+<!-- plugin content -->
 <div class="upcon-plugin">
     <?php echo
         Form::open(Null, array('role' => 'form')) .
@@ -50,7 +55,7 @@
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
-                Form::label('address', __('Adresse / Hausnummer', 'upcon') . Html::nbsp() . '*') .
+                Form::label('address', __('Adresse, Hausnummer', 'upcon') . Html::nbsp() . '*') .
                 Form::input('address', Null, array('required' => 'required'));
             ?>
         </div>
@@ -92,7 +97,7 @@
         </div>
         <div class="6u 12u$(xsmall) upcon-guest">
             <?php echo
-                Form::label('arrival', __('Anreisedatum', 'upcon')) .
+                Form::label('arrival', __('Anreisedatum, Tag + Uhrzeit', 'upcon')) .
                 Form::input('arrival', '');
             ?>
         </div>

@@ -12,3 +12,13 @@
     padding-left: .5em;
 }
 
+.notification {
+    margin-bottom: 2em;
+    padding: 1em;
+}
+.notification-success {
+    background: #060;
+}
+.notification-error {
+    background: #600;
+}

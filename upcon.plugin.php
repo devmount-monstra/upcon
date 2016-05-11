@@ -145,12 +145,10 @@ class UPcon
 
 
     /**
-     * Assign to view
+     * Registration formula view
      *
-     * @param  int     $id     of current registration set
-     * @param  string  $title  of the UPcon
      */
-    public function registration($id, $title)
+    public function registration()
     {
         // get db table objects
         $persons = new Table('upcon_persons');
@@ -158,7 +156,24 @@ class UPcon
         // TODO: Request: add person
         if (Request::post('upcon_registration_submitted')) {
             if (Security::check(Request::post('csrf'))) {
-                // TODO: check requireds, dateformat, status, terms_accepted
+                // TODO: check requireds, dateformat, terms_accepted
+                // check requireds
+                if (
+                    !trim(Request::post('prename')) or
+                    !trim(Request::post('lastname')) or
+                    !trim(Request::post('gender')) or
+                    !trim(Request::post('birthday_d')) or
+                    !trim(Request::post('birthday_m')) or
+                    !trim(Request::post('birthday_y')) or
+                    !trim(Request::post('email')) or
+                    !trim(Request::post('address')) or
+                    !trim(Request::post('country')) or
+                    !trim(Request::post('status')) or
+                    !trim(Request::post('terms_accepted'))
+                ) {
+                    Notification::set('error', __('Es wurden nicht alle Pflichtfelder (*) ausgefüllt. Deine Daten wurden noch nicht gespeichert.', 'upcon'));
+                    Request::redirect(Option::get('upcon_id'));
+                }
                 $persons->insert(
                     array(
                         'timestamp' => time(),
@@ -167,7 +182,7 @@ class UPcon
                         'prename' => (string) Request::post('prename'),
                         'lastname' => (string) Request::post('lastname'),
                         'gender' => (string) Request::post('gender'),
-                        'birthday' => (string) Request::post('birthday'),
+                        'birthday' => sprintf("%02d", Request::post('birthday_d')) . '-' . sprintf("%02d", Request::post('birthday_m')) . '-' . Request::post('birthday_y'),
                         'email' => (string) Request::post('email'),
                         'address' => (string) Request::post('address'),
                         'zip' => (string) Request::post('zip'),
@@ -182,19 +197,17 @@ class UPcon
                         'terms_accepted' => (int) Request::post('terms_accepted'),
                     )
                 );
-                Notification::set('success', __('Person was added with success!', 'upcon'));
+                Notification::set('success', __('Deine Daten wurden erfolgreich gespeichert. Vielen Dank für deine Anmeldung!', 'upcon'));
                 Request::redirect(Option::get('upcon_id'));
             }
             else {
-                Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'upcon'));
+                Notification::set('error', __('Die Anfrage wurde abgelehnt aufgrund eines ungültigen Sicherheitstokens. Bitte Seite neuladen und erneut probieren.', 'upcon'));
                 die();
             }
         }
 
         // return rendered view
         return View::factory('upcon/views/frontend/registration')
-            ->assign('title', $title)
-            ->assign('id', $id)
             ->assign('decision', array(
                 0 => __('Nein', 'upcon'),
                 1 => __('Ja', 'upcon'),
@@ -219,7 +232,7 @@ class UPcon
      */
     public function error()
     {
-        return 'Ooops, an error occured...';
+        return 'Ups, es gab einen Fehler...';
     }
 
 
