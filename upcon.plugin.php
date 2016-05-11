@@ -153,52 +153,78 @@ class UPcon
         // get db table objects
         $persons = new Table('upcon_persons');
 
-        // TODO: Request: add person
+        // get data
+        $data = array(
+            'prename' => Request::post('prename'),
+            'lastname' => Request::post('lastname'),
+            'gender' => Request::post('gender'),
+            'birthday_d' => Request::post('birthday_d'),
+            'birthday_m' => Request::post('birthday_m'),
+            'birthday_y' => Request::post('birthday_y'),
+            'email' => Request::post('email'),
+            'address' => Request::post('address'),
+            'zip' => Request::post('zip'),
+            'city' => Request::post('city'),
+            'country' => Request::post('country'),
+            'mobile' => Request::post('mobile'),
+            'status' => Request::post('status'),
+            'youthgroup' => Request::post('youthgroup'),
+            'safecom_visited' => Request::post('safecom_visited'),
+            'arrival' => Request::post('arrival'),
+            'message' => Request::post('message'),
+            'terms_accepted' => Request::post('terms_accepted'),
+        );
+        $data = array_map('trim', $data);
+
+        // Request: add person
         if (Request::post('upcon_registration_submitted')) {
             if (Security::check(Request::post('csrf'))) {
-                // TODO: check requireds, dateformat, terms_accepted
                 // check requireds
                 if (
-                    !trim(Request::post('prename')) or
-                    !trim(Request::post('lastname')) or
-                    !trim(Request::post('gender')) or
-                    !trim(Request::post('birthday_d')) or
-                    !trim(Request::post('birthday_m')) or
-                    !trim(Request::post('birthday_y')) or
-                    !trim(Request::post('email')) or
-                    !trim(Request::post('address')) or
-                    !trim(Request::post('country')) or
-                    !trim(Request::post('status')) or
-                    !trim(Request::post('terms_accepted'))
+                    !$data['prename'] or
+                    !$data['lastname'] or
+                    !$data['gender'] or
+                    !$data['birthday_d'] or
+                    !$data['birthday_m'] or
+                    !$data['birthday_y'] or
+                    !$data['email'] or
+                    !$data['address'] or
+                    !$data['city'] or
+                    !$data['country'] or
+                    !$data['status']
                 ) {
                     Notification::set('error', __('Es wurden nicht alle Pflichtfelder (*) ausgefüllt. Deine Daten wurden noch nicht gespeichert.', 'upcon'));
-                    Request::redirect(Option::get('upcon_id'));
+                    Request::redirect(Page::url());
+                }
+                if (!Request::post('terms_accepted')) {
+                    Notification::set('error', __('AGB und Datenschutzbedingungen müssen akzeptiert werden!', 'upcon'));
+                    Request::redirect(Page::url());
                 }
                 $persons->insert(
                     array(
                         'timestamp' => time(),
                         'deleted' => 0,
                         'upcon_id' => (string) Option::get('upcon_id'),
-                        'prename' => (string) Request::post('prename'),
-                        'lastname' => (string) Request::post('lastname'),
-                        'gender' => (string) Request::post('gender'),
-                        'birthday' => sprintf("%02d", Request::post('birthday_d')) . '-' . sprintf("%02d", Request::post('birthday_m')) . '-' . Request::post('birthday_y'),
-                        'email' => (string) Request::post('email'),
-                        'address' => (string) Request::post('address'),
-                        'zip' => (string) Request::post('zip'),
-                        'city' => (string) Request::post('city'),
-                        'country' => (string) Request::post('country'),
-                        'mobile' => (string) Request::post('mobile'),
-                        'status' => (int) Request::post('status'),
-                        'youthgroup' => (string) Request::post('youthgroup'),
-                        'safecom_visited' => (int) Request::post('safecom_visited'),
-                        'arrival' => (string) Request::post('arrival'),
-                        'message' => (string) Request::post('message'),
-                        'terms_accepted' => (int) Request::post('terms_accepted'),
+                        'prename' => (string) $data['prename'],
+                        'lastname' => (string) $data['lastname'],
+                        'gender' => (string) $data['gender'],
+                        'birthday' => sprintf("%02d", $data['birthday_d']) . '-' . sprintf("%02d", $data['birthday_m']) . '-' . $data['birthday_y'],
+                        'email' => (string) $data['email'],
+                        'address' => (string) $data['address'],
+                        'zip' => (string) $data['zip'],
+                        'city' => (string) $data['city'],
+                        'country' => (string) $data['country'],
+                        'mobile' => (string) $data['mobile'],
+                        'status' => (int) $data['status'],
+                        'youthgroup' => (string) $data['youthgroup'],
+                        'safecom_visited' => (int) $data['safecom_visited'],
+                        'arrival' => (string) $data['arrival'],
+                        'message' => (string) $data['message'],
+                        'terms_accepted' => (int) $data['terms_accepted'],
                     )
                 );
                 Notification::set('success', __('Deine Daten wurden erfolgreich gespeichert. Vielen Dank für deine Anmeldung!', 'upcon'));
-                Request::redirect(Option::get('upcon_id'));
+                Request::redirect(Page::url());
             }
             else {
                 Notification::set('error', __('Die Anfrage wurde abgelehnt aufgrund eines ungültigen Sicherheitstokens. Bitte Seite neuladen und erneut probieren.', 'upcon'));
@@ -208,6 +234,7 @@ class UPcon
 
         // return rendered view
         return View::factory('upcon/views/frontend/registration')
+            ->assign('data', $data)
             ->assign('decision', array(
                 0 => __('Nein', 'upcon'),
                 1 => __('Ja', 'upcon'),

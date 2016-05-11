@@ -1,7 +1,7 @@
 <!-- notifications -->
 <?php if (Notification::get('success')) { ?><div class="notification notification-success"><?php echo Notification::get('success'); ?></div><?php } ?>
 <?php if (Notification::get('error')) { ?><div class="notification notification-error"><?php echo Notification::get('error'); ?></div><?php } ?>
-
+<?php Debug::dump(Page::url()); ?>
 <!-- plugin content -->
 <div class="upcon-plugin">
     <?php echo
@@ -12,7 +12,7 @@
         <div class="6u 12u$(xsmall)">
             <?php echo
                 Form::label('prename', __('Vorname', 'upcon') . Html::nbsp() . '*') .
-                Form::input('prename', Null, array('required' => 'required'));
+                Form::input('prename', $data['prename'], array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
@@ -59,13 +59,19 @@
                 Form::input('address', Null, array('required' => 'required'));
             ?>
         </div>
-        <div class="6u 12u$(xsmall)">
+        <div class="4u 12u$(xsmall)">
             <?php echo
                 Form::label('zip', __('PLZ', 'upcon')) .
                 Form::input('zip', Null);
             ?>
         </div>
-        <div class="6u 12u$(xsmall)">
+        <div class="4u 12u$(xsmall)">
+            <?php echo
+                Form::label('city', __('Stadt', 'upcon') . Html::nbsp() . '*') .
+                Form::input('city', Null, array('required' => 'required'));
+            ?>
+        </div>
+        <div class="4u 12u$(xsmall)">
             <?php echo
                 Form::label('country', __('Land', 'upcon') . Html::nbsp() . '*') .
                 Form::input('country', Null, array('required' => 'required'));
