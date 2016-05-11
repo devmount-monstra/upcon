@@ -26,6 +26,7 @@ Table::create(
 		'arrival',
 		'message',
 		'terms_accepted',
+		'email_confirmed',
 	)
 );
 

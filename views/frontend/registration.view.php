@@ -8,6 +8,7 @@
         Form::open(Null, array('role' => 'form')) .
         Form::hidden('csrf', Security::token());
     ?>
+    <?php echo Html::heading(__('Persönliche Daten', 'upcon'), 3); ?>
     <div class="row uniform">
         <div class="6u 12u$(xsmall)">
             <?php echo
@@ -55,34 +56,40 @@
         </div>
         <div class="6u 12u$(xsmall)">
             <?php echo
+                Form::label('mobile', __('Telefon', 'upcon')) .
+                Form::input('mobile', $data['mobile']);
+            ?>
+        </div>
+    </div>
+    <?php echo Html::heading(__('Adressdaten', 'upcon'), 3); ?>
+    <div class="row uniform">
+        <div class="6u 12u$(xsmall)">
+            <?php echo
                 Form::label('address', __('Adresse, Hausnummer', 'upcon') . Html::nbsp() . '*') .
                 Form::input('address', $data['address'], array('required' => 'required'));
             ?>
         </div>
-        <div class="4u 12u$(xsmall)">
+        <div class="6u 12u$(xsmall)">
             <?php echo
                 Form::label('zip', __('PLZ', 'upcon')) .
                 Form::input('zip', $data['zip']);
             ?>
         </div>
-        <div class="4u 12u$(xsmall)">
+        <div class="6u 12u$(xsmall)">
             <?php echo
                 Form::label('city', __('Stadt', 'upcon') . Html::nbsp() . '*') .
                 Form::input('city', $data['city'], array('required' => 'required'));
             ?>
         </div>
-        <div class="4u 12u$(xsmall)">
+        <div class="6u 12u$(xsmall)">
             <?php echo
                 Form::label('country', __('Land', 'upcon') . Html::nbsp() . '*') .
                 Form::input('country', $data['country'], array('required' => 'required'));
             ?>
         </div>
-        <div class="6u 12u$(xsmall)">
-            <?php echo
-                Form::label('mobile', __('Telefon', 'upcon')) .
-                Form::input('mobile', $data['mobile']);
-            ?>
-        </div>
+    </div>
+    <?php echo Html::heading(__('Teilnahmedaten', 'upcon'), 3); ?>
+    <div class="row uniform">
         <div class="6u 12u$(xsmall)">
             <?php echo
                 Form::label('status', __('Status', 'upcon') . Html::nbsp() . '*') .
@@ -95,13 +102,13 @@
                 Form::input('youthgroup', $data['youthgroup']);
             ?>
         </div>
-        <div class="6u 12u$(xsmall) upcon-staff">
+        <div class="6u$ 12u$(xsmall) upcon-staff">
             <?php echo
                 Form::label('safecom_visited', __('Sichere Gemeinde besucht', 'upcon')) .
                 Form::select('safecom_visited', $decision, $data['safecom_visited']);
             ?>
         </div>
-        <div class="6u 12u$(xsmall) upcon-guest">
+        <div class="6u$ 12u$(xsmall) upcon-guest">
             <?php echo
                 Form::label('arrival', __('Anreisedatum, Tag + Uhrzeit', 'upcon')) .
                 Form::input('arrival', $data['arrival']);

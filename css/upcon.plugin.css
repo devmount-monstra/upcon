@@ -18,7 +18,9 @@
 }
 .notification-success {
     background: #060;
+    color: #fff;
 }
 .notification-error {
     background: #600;
+    color: #fff;
 }

@@ -176,7 +176,7 @@ class UPcon
         );
         $data = array_map('trim', $data);
 
-        // Request: add person
+        // Request: register person
         if (Request::post('upcon_registration_submitted')) {
             if (Security::check(Request::post('csrf'))) {
                 // check requireds
@@ -194,12 +194,12 @@ class UPcon
                     !$data['status']
                 ) {
                     Notification::setNow('error', __('Es wurden nicht alle Pflichtfelder (*) ausgefüllt. Deine Daten wurden noch nicht gespeichert.', 'upcon'));
-                    // Request::redirect(Page::url());
                 } else
+                // check terms accepted
                 if (!Request::post('terms_accepted')) {
                     Notification::setNow('error', __('AGB und Datenschutzbedingungen müssen akzeptiert werden!', 'upcon'));
-                    // Request::redirect(Page::url());
                 } else {
+                    // insert person if all checks passed
                     $persons->insert(
                         array(
                             'timestamp' => time(),
@@ -221,9 +221,10 @@ class UPcon
                             'arrival' => (string) $data['arrival'],
                             'message' => (string) $data['message'],
                             'terms_accepted' => (int) $data['terms_accepted'],
+                            'email_confirmed' => 0,
                         )
                     );
-                    Notification::set('success', __('Deine Daten wurden erfolgreich gespeichert. Vielen Dank für deine Anmeldung!', 'upcon'));
+                    Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
                     Request::redirect(Page::url());
                 }
             }
@@ -233,7 +234,7 @@ class UPcon
             }
         }
 
-        // return rendered view
+        // return registration view
         return View::factory('upcon/views/frontend/registration')
             ->assign('data', $data)
             ->assign('decision', array(
