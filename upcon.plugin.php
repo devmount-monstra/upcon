@@ -193,38 +193,39 @@ class UPcon
                     !$data['country'] or
                     !$data['status']
                 ) {
-                    Notification::set('error', __('Es wurden nicht alle Pflichtfelder (*) ausgefüllt. Deine Daten wurden noch nicht gespeichert.', 'upcon'));
-                    Request::redirect(Page::url());
-                }
+                    Notification::setNow('error', __('Es wurden nicht alle Pflichtfelder (*) ausgefüllt. Deine Daten wurden noch nicht gespeichert.', 'upcon'));
+                    // Request::redirect(Page::url());
+                } else
                 if (!Request::post('terms_accepted')) {
-                    Notification::set('error', __('AGB und Datenschutzbedingungen müssen akzeptiert werden!', 'upcon'));
+                    Notification::setNow('error', __('AGB und Datenschutzbedingungen müssen akzeptiert werden!', 'upcon'));
+                    // Request::redirect(Page::url());
+                } else {
+                    $persons->insert(
+                        array(
+                            'timestamp' => time(),
+                            'deleted' => 0,
+                            'upcon_id' => (string) Option::get('upcon_id'),
+                            'prename' => (string) $data['prename'],
+                            'lastname' => (string) $data['lastname'],
+                            'gender' => (string) $data['gender'],
+                            'birthday' => sprintf("%02d", $data['birthday_d']) . '-' . sprintf("%02d", $data['birthday_m']) . '-' . $data['birthday_y'],
+                            'email' => (string) $data['email'],
+                            'address' => (string) $data['address'],
+                            'zip' => (string) $data['zip'],
+                            'city' => (string) $data['city'],
+                            'country' => (string) $data['country'],
+                            'mobile' => (string) $data['mobile'],
+                            'status' => (int) $data['status'],
+                            'youthgroup' => (string) $data['youthgroup'],
+                            'safecom_visited' => (int) $data['safecom_visited'],
+                            'arrival' => (string) $data['arrival'],
+                            'message' => (string) $data['message'],
+                            'terms_accepted' => (int) $data['terms_accepted'],
+                        )
+                    );
+                    Notification::set('success', __('Deine Daten wurden erfolgreich gespeichert. Vielen Dank für deine Anmeldung!', 'upcon'));
                     Request::redirect(Page::url());
                 }
-                $persons->insert(
-                    array(
-                        'timestamp' => time(),
-                        'deleted' => 0,
-                        'upcon_id' => (string) Option::get('upcon_id'),
-                        'prename' => (string) $data['prename'],
-                        'lastname' => (string) $data['lastname'],
-                        'gender' => (string) $data['gender'],
-                        'birthday' => sprintf("%02d", $data['birthday_d']) . '-' . sprintf("%02d", $data['birthday_m']) . '-' . $data['birthday_y'],
-                        'email' => (string) $data['email'],
-                        'address' => (string) $data['address'],
-                        'zip' => (string) $data['zip'],
-                        'city' => (string) $data['city'],
-                        'country' => (string) $data['country'],
-                        'mobile' => (string) $data['mobile'],
-                        'status' => (int) $data['status'],
-                        'youthgroup' => (string) $data['youthgroup'],
-                        'safecom_visited' => (int) $data['safecom_visited'],
-                        'arrival' => (string) $data['arrival'],
-                        'message' => (string) $data['message'],
-                        'terms_accepted' => (int) $data['terms_accepted'],
-                    )
-                );
-                Notification::set('success', __('Deine Daten wurden erfolgreich gespeichert. Vielen Dank für deine Anmeldung!', 'upcon'));
-                Request::redirect(Page::url());
             }
             else {
                 Notification::set('error', __('Die Anfrage wurde abgelehnt aufgrund eines ungültigen Sicherheitstokens. Bitte Seite neuladen und erneut probieren.', 'upcon'));
