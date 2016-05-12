@@ -34,3 +34,5 @@ Table::create(
 Option::add('upcon_title', '');
 Option::add('upcon_id', '');
 Option::add('upcon_active', 0);
+Option::add('upcon_mail_confirmation', '');
+Option::add('upcon_mail_info', '');
