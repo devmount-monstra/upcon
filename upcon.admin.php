@@ -26,6 +26,9 @@ Navigation::add(__('UPcon', 'upcon'), 'content', 'upcon', 10);
 // Add action on admin_pre_render hook
 Action::add('admin_pre_render','UPconAdmin::_getAjaxData');
 
+// register repository classes
+require_once 'repositories/repository.persons.php';
+
 /**
  * UPcon class
  *
@@ -37,12 +40,12 @@ class UPconAdmin extends Backend
      */
     public static function _getAjaxData()
     {
-        // Ajax Request: edit person
-        if (Request::post('edit_person_id')) {
-            $upcon = new Table('upcon_persons');
-            echo json_encode($upcon->select('[id=' . Request::post('edit_person_id') . ']')[0]);
-            Request::shutdown();
-        }
+        // // Ajax Request: edit person
+        // if (Request::post('edit_person_id')) {
+        //     $upcon = new Table('upcon_persons');
+        //     echo json_encode($upcon->select('[id=' . Request::post('edit_person_id') . ']')[0]);
+        //     Request::shutdown();
+        // }
     }
 
     /**
