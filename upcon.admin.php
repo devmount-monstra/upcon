@@ -40,10 +40,9 @@ class UPconAdmin extends Backend
      */
     public static function _getAjaxData()
     {
-        // // Ajax Request: edit person
+        // // Ajax Request: add person
         // if (Request::post('edit_person_id')) {
-        //     $upcon = new Table('upcon_persons');
-        //     echo json_encode($upcon->select('[id=' . Request::post('edit_person_id') . ']')[0]);
+        //     echo json_encode(EventsRepository::getById((int) Request::post('edit_person_id')));
         //     Request::shutdown();
         // }
     }
@@ -53,9 +52,7 @@ class UPconAdmin extends Backend
      */
     public static function main()
     {
-        // get db table objects
-        $persons = new Table('upcon_persons');
-
+        // handle action requests
         if (Request::get('action')) {
             switch (Request::get('action')) {
                 // Request: configuration
@@ -89,7 +86,7 @@ class UPconAdmin extends Backend
         } else {
             // Display view
             View::factory('upcon/views/backend/index')
-                ->assign('persons', $persons->select(Null, 'all'))
+                ->assign('persons', PersonRepository::getActive())
                 ->display();
         }
     }

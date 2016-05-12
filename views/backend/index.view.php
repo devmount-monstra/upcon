@@ -1,4 +1,4 @@
-<?php //Debug::dump($persons); ?>
+<?php Debug::dump($persons); ?>
 <!-- i18n PHP output for JS -->
 <?php echo
     Form::hidden('output_add', __('Add', 'upcon')) .

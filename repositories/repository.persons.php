@@ -9,7 +9,7 @@ defined('MONSTRA_ACCESS') or die('No direct script access.');
  * Handles all persons table database requests
  *
  */
-class PersonsRepository
+class PersonRepository
 {
     /**
      * Get persons table object
