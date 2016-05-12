@@ -1,7 +1,7 @@
 <div class='upcon-admin'>
     <div class="vertical-align margin-bottom-1">
         <div class="text-left row-phone">
-            <?php echo Html::heading(__('Configuration', 'upcon'), 2); ?>
+            <?php echo Html::heading(__('UPcon', 'upcon'), 2); ?>
         </div>
         <div class="text-right row-phone">
             <a href="index.php?id=upcon" class="btn btn-default">
