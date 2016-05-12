@@ -52,6 +52,22 @@ class UPconAdmin extends Backend
      */
     public static function main()
     {
+        // Request: delete person
+        if (Request::post('delete_person')) {
+            if (Security::check(Request::post('csrf'))) {
+                $id = (int) Request::post('delete_person');
+                if (PersonRepository::update($id, array('deleted' => 1))) {
+                    Notification::set('success', __('Person has been moved to trash with success!', 'events'));
+                } else {
+                    Notification::set('error', __('Table->update() returned an error. Person could not be deleted.', 'events'));
+                }
+                Request::redirect('index.php?id=upcon');
+            }
+            else {
+                Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'events'));
+                die();
+            }
+        }
         // handle action requests
         if (Request::get('action')) {
             switch (Request::get('action')) {
