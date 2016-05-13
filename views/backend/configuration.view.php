@@ -43,7 +43,7 @@
                     ?>
                 </div>
                 <div class="col-md-4">
-                    <!-- config archive description placeholder -->
+                    <!-- config upcon id -->
                     <?php echo
                         Form::label(
                             'upcon_id',
@@ -54,7 +54,7 @@
                     ?>
                 </div>
                 <div class="col-md-3">
-                    <!-- config archive description placeholder -->
+                    <!-- config upcon active -->
                     <?php echo
                         Form::label(
                             'upcon_active',
@@ -62,6 +62,32 @@
                             array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Use this switch to activate the configured UPdate Convention', 'upcon'))
                         ) .
                         Form::select('upcon_active', array(0 => __("Inactive", 'upcon'), 1 => __('Active', 'upcon')), Null, array('class' => 'form-control'));
+                    ?>
+                </div>
+            </div>
+            <div class="row margin-top-1">
+                <div class="col-md-12">
+                    <!-- config confirmation mail content -->
+                    <?php echo
+                        Form::label(
+                            'upcon_mail_confirmation',
+                            __('Confirmation email content', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Content of email to confirm email address. Possible markers: #name#, #upcon-title#, #link#', 'upcon'))
+                        ) .
+                        Form::textarea('upcon_mail_confirmation', Option::get('upcon_mail_confirmation'), array('rows' => '10', 'class' => 'form-control'));
+                    ?>
+                </div>
+            </div>
+            <div class="row margin-top-1">
+                <div class="col-md-12">
+                    <!-- config info mail content -->
+                    <?php echo
+                        Form::label(
+                            'upcon_mail_info',
+                            __('Information email content', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Content of email to inform about payment etc. Possible markers: #name#, #upcon-title#, #price#, #staff# ... #/staff#', 'upcon'))
+                        ) .
+                        Form::textarea('upcon_mail_info', Option::get('upcon_mail_info'), array('rows' => '10', 'class' => 'form-control'));
                     ?>
                 </div>
             </div>
