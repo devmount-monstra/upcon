@@ -58,122 +58,22 @@
 
         <!-- Tab: confirmed -->
         <div class="tab-pane active" id="confirmed">
-
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th><?php echo __('Name', 'upcon'); ?></th>
-                        <th><?php echo __('Birthday', 'upcon'); ?></th>
-                        <th><?php echo __('Email', 'upcon'); ?></th>
-                        <th><?php echo __('Status', 'upcon'); ?></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (sizeof($persons_confirmed) > 0) {
-                        foreach ($persons_confirmed as $person) { ?>
-                            <tr>
-                                <td>
-                                    <?php echo $person['prename'] . ' ' . $person['lastname']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $person['birthday']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $person['email']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $person['status']; ?>
-                                </td>
-                                <td>
-                                    <div class="pull-right">
-                                        <?php echo
-                                            Form::open() .
-                                            Form::hidden('csrf', Security::token()) .
-                                            Form::hidden('delete_person', $person['id']);
-                                        ?>
-                                            <button
-                                                class="btn btn-danger"
-                                                value="1"
-                                                onclick="return confirmDelete('<?php echo __('Delete person »:name«', 'upcon', array(':name' => $person['prename'] . ' ' . $person['lastname'])); ?>')"
-                                                title="<?php echo __('Delete', 'upcon'); ?>"
-                                            >
-                                                <?php echo __('Delete', 'upcon'); ?>
-                                            </button>
-                                        <?php echo Form::close(); ?>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php }
-                    } else { ?>
-                        <tr>
-                            <td colspan="5">
-                                <?php echo __('No confirmed persons available.', 'upcon'); ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+            <?php echo
+                View::factory('upcon/views/backend/table.persons')
+                    ->assign('persons', $persons_confirmed)
+                    ->assign('type', 'confirmed')
+                    ->display();
+            ?>
         </div>
 
         <!-- Tab: pending -->
         <div class="tab-pane" id="pending">
-
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th><?php echo __('Name', 'upcon'); ?></th>
-                        <th><?php echo __('Birthday', 'upcon'); ?></th>
-                        <th><?php echo __('Email', 'upcon'); ?></th>
-                        <th><?php echo __('Status', 'upcon'); ?></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (sizeof($persons_pending) > 0) {
-                        foreach ($persons_pending as $person) { ?>
-                            <tr>
-                                <td>
-                                    <?php echo $person['prename'] . ' ' . $person['lastname']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $person['birthday']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $person['email']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $person['status']; ?>
-                                </td>
-                                <td>
-                                    <div class="pull-right">
-                                        <?php echo
-                                            Form::open() .
-                                            Form::hidden('csrf', Security::token()) .
-                                            Form::hidden('delete_person', $person['id']);
-                                        ?>
-                                            <button
-                                                class="btn btn-danger"
-                                                value="1"
-                                                onclick="return confirmDelete('<?php echo __('Delete person »:name«', 'upcon', array(':name' => $person['prename'] . ' ' . $person['lastname'])); ?>')"
-                                                title="<?php echo __('Delete', 'upcon'); ?>"
-                                            >
-                                                <?php echo __('Delete', 'upcon'); ?>
-                                            </button>
-                                        <?php echo Form::close(); ?>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php }
-                    } else { ?>
-                        <tr>
-                            <td colspan="5">
-                                <?php echo __('No pending persons available.', 'upcon'); ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+            <?php echo
+                View::factory('upcon/views/backend/table.persons')
+                    ->assign('persons', $persons_pending)
+                    ->assign('type', 'pending')
+                    ->display();
+            ?>
         </div>
 
     </div>
