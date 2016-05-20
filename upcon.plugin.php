@@ -224,6 +224,7 @@ class UPcon
                             'email_confirmed' => 0,
                         )
                     );
+                    // TODO: send mailaddress confirmation mail
                     Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
                     Request::redirect(Page::url());
                 }
@@ -232,6 +233,11 @@ class UPcon
                 Notification::set('error', __('Die Anfrage wurde abgelehnt aufgrund eines ungültigen Sicherheitstokens. Bitte Seite neuladen und erneut probieren.', 'upcon'));
                 die();
             }
+        }
+
+        // TODO: Request: confirm mail address
+        if (Request::get('upcon_confirm_mail')) {
+
         }
 
         // return registration view

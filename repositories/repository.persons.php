@@ -103,15 +103,28 @@ class PersonRepository
 
 
     /**
-     * Get all active (not deleted) person objects
+     * Get all active (not deleted) person objects with confirmed mail address
      *
      * @return array
      *
      */
-    public static function getActive()
+    public static function getConfirmed()
     {
         $objects = self::getTable();
-        return $objects->select('[deleted=0]', 'all', null, null, 'timestamp', 'ASC');
+        return $objects->select('[deleted=0 and email_confirmed=1]', 'all', null, null, 'timestamp', 'ASC');
+    }
+
+
+    /**
+     * Get all active (not deleted) person objects with pending mail address confirmation
+     *
+     * @return array
+     *
+     */
+    public static function getPending()
+    {
+        $objects = self::getTable();
+        return $objects->select('[deleted=0 and not(email_confirmed=1)]', 'all', null, null, 'timestamp', 'ASC');
     }
 
 

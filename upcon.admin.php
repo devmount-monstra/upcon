@@ -104,7 +104,8 @@ class UPconAdmin extends Backend
         } else {
             // Display view
             View::factory('upcon/views/backend/index')
-                ->assign('persons', PersonRepository::getActive())
+                ->assign('persons_pending', PersonRepository::getPending())
+                ->assign('persons_confirmed', PersonRepository::getConfirmed())
                 ->display();
         }
     }
