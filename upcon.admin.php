@@ -40,11 +40,11 @@ class UPconAdmin extends Backend
      */
     public static function _getAjaxData()
     {
-        // // Ajax Request: add person
-        // if (Request::post('edit_person_id')) {
-        //     echo json_encode(EventsRepository::getById((int) Request::post('edit_person_id')));
-        //     Request::shutdown();
-        // }
+        // Ajax Request: add person
+        if (Request::post('person_id')) {
+            echo json_encode(PersonRepository::getById((int) Request::post('person_id')));
+            Request::shutdown();
+        }
     }
 
     /**

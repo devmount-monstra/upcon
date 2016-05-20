@@ -92,3 +92,93 @@
         </div>
     </div>
 </div>
+
+<!-- modal: person info -->
+<div id="modal-person-info" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="close" data-dismiss="modal">&times;</div>
+                <h4 class="modal-title" id="person-name"></h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Timestamp</td>
+                        <td id="upcon-person-timestamp"></td>
+                    </tr>
+                    <tr>
+                        <td>Prename</td>
+                        <td id="upcon-person-prename"></td>
+                    </tr>
+                    <tr>
+                        <td>Last name</td>
+                        <td id="upcon-person-lastname"></td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td id="upcon-person-gender"></td>
+                    </tr>
+                    <tr>
+                        <td>Birthday</td>
+                        <td id="upcon-person-birthday"></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td id="upcon-person-email"></td>
+                    </tr>
+                    <tr>
+                        <td>Email confirmed</td>
+                        <td id="upcon-person-email_confirmed"></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile</td>
+                        <td id="upcon-person-mobile"></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td id="upcon-person-address"></td>
+                    </tr>
+                    <tr>
+                        <td>ZIP</td>
+                        <td id="upcon-person-zip"></td>
+                    </tr>
+                    <!-- <tr>
+                        <td>City</td>
+                        <td id="upcon-person-city"></td>
+                    </tr> -->
+                    <tr>
+                        <td>Country</td>
+                        <td id="upcon-person-country"></td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td id="upcon-person-status"></td>
+                    </tr>
+                    <tr>
+                        <td>Youthgroup</td>
+                        <td id="upcon-person-youthgroup"></td>
+                    </tr>
+                    <tr>
+                        <td>'Sichere Gemeinde' visited</td>
+                        <td id="upcon-person-safecom_visited"></td>
+                    </tr>
+                    <tr>
+                        <td>Arrival</td>
+                        <td id="upcon-person-arrival"></td>
+                    </tr>
+                    <tr>
+                        <td>Message</td>
+                        <td id="upcon-person-message"></td>
+                    </tr>
+                    <tr>
+                        <td>Terms accepted</td>
+                        <td id="upcon-person-terms_accepted"></td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

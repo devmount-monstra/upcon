@@ -26,6 +26,9 @@
                     </td>
                     <td>
                         <div class="pull-right">
+                            <a href="#" class="btn btn-info upcon-person-info" data-toggle="modal" data-target="#modal-person-info" upcon-person="<?php echo $person['id']; ?>">
+                                <?php echo __('Info', 'upcon'); ?>
+                            </a>
                             <?php echo
                                 Form::open() .
                                 Form::hidden('csrf', Security::token()) .
