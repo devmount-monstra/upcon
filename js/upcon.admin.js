@@ -26,7 +26,7 @@ $.monstra.upcon = {
                 success: function(person){
                     var dialog = $('#modal-person-info');
                     dialog.find('#person-name').text(person.prename + ' ' + person.lastname);
-                    dialog.find('#upcon-person-timestamp').text(person.timestamp);
+                    dialog.find('#upcon-person-timestamp').text(timeConverter(person.timestamp));
                     dialog.find('#upcon-person-upcon_id').text(person.upcon_id);
                     dialog.find('#upcon-person-prename').text(person.prename);
                     dialog.find('#upcon-person-lastname').text(person.lastname);
@@ -57,3 +57,17 @@ $.monstra.upcon = {
 $(document).ready(function(){
 	$.monstra.upcon.init();
 });
+
+// helper function: timeConverter
+// http://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
+function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp * 1000);
+    var year = a.getFullYear();
+    var month = a.getMonth() < 10 ? '0' + a.getMonth() : a.getMonth();
+    var date = a.getDate() < 10 ? '0' + a.getDate() : a.getDate();
+    var hour = a.getHours() < 10 ? '0' + a.getHours() : a.getHours();
+    var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
+    var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
+    var time = date + '.' + month + '.' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
+}
