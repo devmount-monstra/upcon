@@ -38,7 +38,7 @@ $.monstra.upcon = {
                     // dialog.find('#upcon-person-city').text(person.city);
                     dialog.find('#upcon-person-country').text(person.country);
                     dialog.find('#upcon-person-mobile').text(person.mobile);
-                    dialog.find('#upcon-person-status').text(person.status);
+                    dialog.find('#upcon-person-status').text(statusConverter(person.status));
                     dialog.find('#upcon-person-youthgroup').text(person.youthgroup);
                     dialog.find('#upcon-person-safecom_visited').text(person.safecom_visited ? 'yes' : 'no');
                     dialog.find('#upcon-person-arrival').text(person.arrival);
@@ -70,4 +70,16 @@ function timeConverter(UNIX_timestamp){
     var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
     var time = date + '.' + month + '.' + year + ' ' + hour + ':' + min + ':' + sec ;
     return time;
+}
+
+// helper function: statusConverter
+function statusConverter(status) {
+    states = {
+        '1':'NORMAL',
+        '2':'EARLY',
+        '3':'BUJU',
+        '4':'STAFF',
+        '5':'VISITOR'
+    };
+    return states[status];
 }
