@@ -231,7 +231,7 @@ class UPcon
                     $mail->AddReplyTo(Option::get('upcon_admin_mail'));
                     $mail->AddAddress($data['email']);
                     $mail->Subject = Option::get('upcon_mail_confirmation_subject');
-                    $mail->Body = Option::get('upcon_mail_confirmation');
+                    $mail->Body = Option::get('upcon_mail_confirmation'); // TODO: replace markers
                     if ($mail->Send()) {
                         Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
                         Request::redirect(Page::url());
@@ -248,6 +248,13 @@ class UPcon
 
         // TODO: Request: confirm mail address
         if (Request::get('upcon_confirm_mail')) {
+            // TODO: check link
+            // set mail confirmed
+            if (PersonRepository::update($id, array('email_confirmed' => 1))) {
+                Notification::set('success', __('Deine Mailadresse wurde erfolgreich bestätigt! Du hast jetzt eine Mail mit allen notwendigen Informationen zu deiner UPcon Anmeldung erhalten.', 'events'));
+            } else {
+                Notification::set('error', __('Table->update() returned an error. Person could not be deleted.', 'events'));
+            }
 
         }
 
