@@ -291,14 +291,14 @@ class UPcon
 
 
     /**
-     * error occurance
+     * status labels
      *
      * @param integer $state to convert
      *
      * @return string status label
      *
      */
-    public function statusLabel($state)
+    public static function statusLabel($state)
     {
         switch ($state) {
             case UPcon::STATUS_NORMAL:
@@ -315,6 +315,39 @@ class UPcon
                 break;
             case UPcon::STATUS_VISITOR:
                 return 'VISITOR';
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
+
+
+    /**
+     * status label classes
+     *
+     * @param integer $state to convert
+     *
+     * @return string status label class
+     *
+     */
+    public static function statusLabelClass($state)
+    {
+        switch ($state) {
+            case UPcon::STATUS_NORMAL:
+                return 'default';
+                break;
+            case UPcon::STATUS_EARLY:
+                return 'warning';
+                break;
+            case UPcon::STATUS_BUJU:
+                return 'success';
+                break;
+            case UPcon::STATUS_STAFF:
+                return 'primary';
+                break;
+            case UPcon::STATUS_VISITOR:
+                return 'info';
                 break;
             default:
                 return '';

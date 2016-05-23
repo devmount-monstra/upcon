@@ -22,7 +22,7 @@
                         <?php echo $person['email']; ?>
                     </td>
                     <td>
-                        <?php echo UPcon::statusLabel($person['status']); ?>
+                        <span class="label label-<?php echo UPcon::statusLabelClass($person['status']); ?>"><?php echo UPcon::statusLabel($person['status']); ?></span>
                     </td>
                     <td>
                         <div class="pull-right">

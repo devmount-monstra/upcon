@@ -144,10 +144,10 @@
                         <td>ZIP</td>
                         <td id="upcon-person-zip"></td>
                     </tr>
-                    <!-- <tr>
+                    <tr>
                         <td>City</td>
                         <td id="upcon-person-city"></td>
-                    </tr> -->
+                    </tr>
                     <tr>
                         <td>Country</td>
                         <td id="upcon-person-country"></td>

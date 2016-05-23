@@ -35,10 +35,10 @@ $.monstra.upcon = {
                     dialog.find('#upcon-person-email').text(person.email);
                     dialog.find('#upcon-person-address').text(person.address);
                     dialog.find('#upcon-person-zip').text(person.zip);
-                    // dialog.find('#upcon-person-city').text(person.city);
+                    dialog.find('#upcon-person-city').text(person.city);
                     dialog.find('#upcon-person-country').text(person.country);
                     dialog.find('#upcon-person-mobile').text(person.mobile);
-                    dialog.find('#upcon-person-status').text(statusConverter(person.status));
+                    dialog.find('#upcon-person-status').html('<span class="label label-' + statusLabelClass(person.status) + '">' + statusConverter(person.status) + '</span>');
                     dialog.find('#upcon-person-youthgroup').text(person.youthgroup);
                     dialog.find('#upcon-person-safecom_visited').text(person.safecom_visited ? 'yes' : 'no');
                     dialog.find('#upcon-person-arrival').text(person.arrival);
@@ -83,4 +83,16 @@ function statusConverter(status) {
         '5':'VISITOR'
     };
     return states[status];
+}
+
+// helper function: statusLabelClass
+function statusLabelClass(status) {
+    classes = {
+        '1':'default',
+        '2':'warning',
+        '3':'success',
+        '4':'primary',
+        '5':'info'
+    };
+    return classes[status];
 }
