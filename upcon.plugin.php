@@ -231,7 +231,11 @@ class UPcon
                     $mail->AddReplyTo(Option::get('upcon_admin_mail'));
                     $mail->AddAddress($data['email']);
                     $mail->Subject = Option::get('upcon_mail_confirmation_subject');
-                    $mail->Body = Option::get('upcon_mail_confirmation'); // TODO: replace markers
+                    $mail->Body = str_replace(
+                        array('#name#', '#upcon-title#', '#link#'),
+                        array($data['prename'] . ' ' . $data['lastname'], Option::get('upcon_title'), 'link'), // TODO: generate link
+                        Option::get('upcon_mail_confirmation')
+                    );
                     if ($mail->Send()) {
                         Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
                         Request::redirect(Page::url());
