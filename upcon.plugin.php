@@ -226,11 +226,12 @@ class UPcon
                     );
                     // send mailaddress confirmation mail
                     $mail = new PHPMailer();
+                    $mail->CharSet = 'UTF-8';
                     $mail->SetFrom(Option::get('upcon_admin_mail'));
                     $mail->AddReplyTo(Option::get('upcon_admin_mail'));
                     $mail->AddAddress($data['email']);
-                    $mail->Subject = Request::post('upcon_mail_confirmation_subject');
-                    $mail->Body = Request::post('upcon_mail_confirmation');
+                    $mail->Subject = Option::get('upcon_mail_confirmation_subject');
+                    $mail->Body = Option::get('upcon_mail_confirmation');
                     if ($mail->Send()) {
                         Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
                         Request::redirect(Page::url());
