@@ -98,7 +98,7 @@ class UPcon
      * Creates shortcodes for content pages
      *
      * <code>
-     *      {upcon show="registration" title="UPcon 2016" id="upcon16"}
+     *      {upcon show="registration"}
      * </code>
      *
      * @param  array $attributes given
@@ -282,10 +282,44 @@ class UPcon
 
     /**
      * error occurance
+     *
      */
     public function error()
     {
         return 'Ups, es gab einen Fehler...';
+    }
+
+
+    /**
+     * error occurance
+     *
+     * @param integer $state to convert
+     *
+     * @return string status label
+     *
+     */
+    public function statusLabel($state)
+    {
+        switch ($state) {
+            case UPcon::STATUS_NORMAL:
+                return 'NORMAL';
+                break;
+            case UPcon::STATUS_EARLY:
+                return 'EARLY';
+                break;
+            case UPcon::STATUS_BUJU:
+                return 'BUJU';
+                break;
+            case UPcon::STATUS_STAFF:
+                return 'STAFF';
+                break;
+            case UPcon::STATUS_VISITOR:
+                return 'VISITOR';
+                break;
+            default:
+                return '';
+                break;
+        }
     }
 
 
