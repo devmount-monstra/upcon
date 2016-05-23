@@ -224,15 +224,19 @@ class UPcon
                             'email_confirmed' => 0,
                         )
                     );
-                    // TODO: send mailaddress confirmation mail
-                    // $mail = new PHPMailer();
-                    // $mail->SetFrom($email);
-                    // $mail->AddReplyTo($email);
-                    // $mail->AddAddress($recipient);
-                    // $mail->Subject = $name;
-                    // $mail->Body = $body;
-                    Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
-                    Request::redirect(Page::url());
+                    // send mailaddress confirmation mail
+                    $mail = new PHPMailer();
+                    $mail->SetFrom(Option::get('upcon_admin_mail'));
+                    $mail->AddReplyTo(Option::get('upcon_admin_mail'));
+                    $mail->AddAddress($data['email']);
+                    $mail->Subject = Request::post('upcon_mail_confirmation_subject');
+                    $mail->Body = Request::post('upcon_mail_confirmation');
+                    if ($mail->Send()) {
+                        Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
+                        Request::redirect(Page::url());
+                    } else {
+                        Notification::set('error', __('Die Mail zur Bestätigung deiner Mailadresse konnte nicht versendet werden. Bitte schreib uns an ' . Option::get('upcon_admin_mail') . '!', 'upcon'));
+                    }
                 }
             }
             else {

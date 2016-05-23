@@ -82,6 +82,19 @@
             </div>
             <div class="row margin-top-1">
                 <div class="col-md-12">
+                    <!-- config confirmation mail subject -->
+                    <?php echo
+                        Form::label(
+                            'upcon_mail_confirmation_subject',
+                            __('Confirmation email subject', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Subject of email to confirm email address', 'upcon'))
+                        ) .
+                        Form::input('upcon_mail_confirmation_subject', Option::get('upcon_mail_confirmation_subject'), array('class' => 'form-control'));
+                    ?>
+                </div>
+            </div>
+            <div class="row margin-top-1">
+                <div class="col-md-12">
                     <!-- config confirmation mail content -->
                     <?php echo
                         Form::label(
@@ -90,6 +103,19 @@
                             array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Content of email to confirm email address. Possible markers: #name#, #upcon-title#, #link#', 'upcon'))
                         ) .
                         Form::textarea('upcon_mail_confirmation', Option::get('upcon_mail_confirmation'), array('rows' => '10', 'class' => 'form-control'));
+                    ?>
+                </div>
+            </div>
+            <div class="row margin-top-1">
+                <div class="col-md-12">
+                    <!-- config info mail subject -->
+                    <?php echo
+                        Form::label(
+                            'upcon_mail_info_subject',
+                            __('Information email subject', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Subject of email to inform about payment etc.', 'upcon'))
+                        ) .
+                        Form::input('upcon_mail_info_subject', Option::get('upcon_mail_info_subject'), array('class' => 'form-control'));
                     ?>
                 </div>
             </div>
