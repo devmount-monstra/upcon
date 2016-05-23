@@ -225,6 +225,12 @@ class UPcon
                         )
                     );
                     // TODO: send mailaddress confirmation mail
+                    // $mail = new PHPMailer();
+                    // $mail->SetFrom($email);
+                    // $mail->AddReplyTo($email);
+                    // $mail->AddAddress($recipient);
+                    // $mail->Subject = $name;
+                    // $mail->Body = $body;
                     Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
                     Request::redirect(Page::url());
                 }

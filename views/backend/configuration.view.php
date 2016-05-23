@@ -31,7 +31,7 @@
                 HTML::br();
             ?>
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <!-- config upcon title -->
                     <?php echo
                         Form::label(
@@ -42,7 +42,7 @@
                         Form::input('upcon_title', Option::get('upcon_title'), array('class' => 'form-control'));
                     ?>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <!-- config upcon id -->
                     <?php echo
                         Form::label(
@@ -63,6 +63,21 @@
                         ) .
                         Form::select('upcon_active', array(0 => __("Inactive", 'upcon'), 1 => __('Active', 'upcon')), Null, array('class' => 'form-control'));
                     ?>
+                </div>
+            </div>
+            <div class="row margin-top-1">
+                <div class="col-md-6">
+                    <!-- config admin mail address -->
+                    <?php echo
+                        Form::label(
+                            'upcon_admin_mail',
+                            __('Admin email address', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Email address for sender of confirmation and information mails', 'upcon'))
+                        ) .
+                        Form::input('upcon_admin_mail', Option::get('upcon_admin_mail'), array('class' => 'form-control'));
+                    ?>
+                </div>
+                <div class="col-md-6">
                 </div>
             </div>
             <div class="row margin-top-1">
