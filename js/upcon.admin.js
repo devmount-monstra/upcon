@@ -5,6 +5,8 @@ $.monstra.upcon = {
 
     /* initialize document ready functions */
 	init: function(){
+        // activate current tab on page reload
+        $.monstra.upcon.handleTabLinks();
 
         // modal: readme greybox script
         $('.readme-plugin').click(function() {
@@ -49,6 +51,21 @@ $.monstra.upcon = {
             });
         });
 
+    },
+
+    /* activate tab and sub tab by GET param */
+    handleTabLinks: function() {
+        var hash = window.location.href.split("#")[1];
+        if (hash !== undefined) {
+            var hpieces = hash.split("/");
+            for (var i=0;i<hpieces.length;i++) {
+                var domelid = hpieces[i];
+                var domitem = $('a[href=#' + domelid + '][data-toggle=tab]');
+                if (domitem.length > 0) {
+                    domitem.tab('show');
+                }
+            }
+        }
     }
 
 };

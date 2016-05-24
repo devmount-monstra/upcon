@@ -37,6 +37,7 @@ class UPconAdmin extends Backend
 {
     /**
      * Ajax: get Event by ID
+     *
      */
     public static function _getAjaxData()
     {
@@ -49,6 +50,7 @@ class UPconAdmin extends Backend
 
     /**
      * main upcon admin function
+     *
      */
     public static function main()
     {
@@ -61,7 +63,7 @@ class UPconAdmin extends Backend
                 } else {
                     Notification::set('error', __('Table->update() returned an error. Person could not be deleted.', 'events'));
                 }
-                Request::redirect('index.php?id=upcon');
+                Request::redirect('index.php?id=upcon#' . PersonRepository::getMailStatus($id));
             }
             else {
                 Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'events'));

@@ -153,4 +153,19 @@ class PersonRepository
         return $objects->lastId();
     }
 
+
+    /**
+     * Returns mail confirmation status (pending or confirmed)
+     *
+     * @param int id
+     *
+     * @return string status
+     *
+     */
+    public static function getMailStatus($id)
+    {
+        $person = self::getById($id);
+        return $person['email_confirmed'] == '1' ? 'confirmed' : 'pending';
+    }
+
 }
