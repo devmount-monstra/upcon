@@ -254,6 +254,22 @@ class UPcon
         if (!empty(Request::get('upcon_confirm'))) {
             // check link
             if (UPcon::emailIsConfirmed(Request::get('upcon_confirm'))) {
+                // send mailaddress information mail
+                list($id, $hash) = explode('-', Request::get('upcon_confirm'));
+                $person = PersonRepository::getById($id);
+                $mail = new PHPMailer();
+                $mail->CharSet = 'UTF-8';
+                $mail->SetFrom(Option::get('upcon_admin_mail'));
+                $mail->AddReplyTo(Option::get('upcon_admin_mail'));
+                $mail->AddAddress($person['email']);
+                $mail->Subject = Option::get('upcon_mail_info_subject');
+                // TODO: replace staff/
+                $mail->Body = str_replace(
+                    array('#name#', '#upcon-title#', '#price#'),
+                    array($person['prename'] . ' ' . $person['lastname'], Option::get('upcon_title'), '69'), // generate link
+                    Option::get('upcon_mail_info')
+                );
+
                 Notification::setNow('success', __('Deine Mailadresse wurde erfolgreich bestätigt! Du hast jetzt eine Mail mit allen notwendigen Informationen zu deiner UPcon Anmeldung erhalten.', 'events'));
             } else {
                 Notification::setNow('error', __('Deine Mailadresse konnte nicht bestätigt werden. Bitte kontaktiere einen Admin unter ' . Option::get('upcon_admin_mail') . '!', 'events'));
@@ -397,5 +413,24 @@ class UPcon
         }
     }
 
+    /**
+     * returns string between two delimiter
+     * http://www.justin-cook.com/wp/2006/03/31/php-parse-a-string-between-two-strings/
+     *
+     * @param  string $string full string
+     * @param  string $start  tag
+     * @param  string $end    tag
+     *
+     * @return string         text between delimiter
+     *
+     */
+    function getStringBetween($string, $start, $end){
+        $string = " ".$string;
+        $ini = strpos($string,$start);
+        if ($ini == 0) return "";
+        $ini += strlen($start);
+        $len = strpos($string,$end,$ini) - $ini;
+        return substr($string,$ini,$len);
+    }
 
 }
