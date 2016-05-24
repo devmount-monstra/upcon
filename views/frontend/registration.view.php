@@ -1,4 +1,4 @@
-<?php //Debug::dump(Page::url()); ?>
+<?php //Debug::dump($debug); ?>
 <!-- notifications -->
 <?php if (Notification::get('success')) { ?><div class="notification notification-success"><?php echo Notification::get('success'); ?></div><?php } ?>
 <?php if (Notification::get('error')) { ?><div class="notification notification-error"><?php echo Notification::get('error'); ?></div><?php } ?>

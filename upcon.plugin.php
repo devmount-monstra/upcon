@@ -35,17 +35,15 @@ if (Session::exists('user_role') && in_array(Session::get('user_role'), array('a
 }
 
 
-/**
- * Add shortcode
- */
+// Add shortcode
 Shortcode::add('upcon', 'UPcon::_shortcode');
 
-
-/**
- * Add CSS and JavaScript
- */
+// Add CSS and JavaScript
 Action::add('theme_footer', 'UPcon::_insertJS');
 Action::add('theme_header', 'UPcon::_insertCSS');
+
+// register repository classes
+require_once 'repositories/repository.persons.php';
 
 
 /**
@@ -233,14 +231,14 @@ class UPcon
                     $mail->Subject = Option::get('upcon_mail_confirmation_subject');
                     $mail->Body = str_replace(
                         array('#name#', '#upcon-title#', '#link#'),
-                        array($data['prename'] . ' ' . $data['lastname'], Option::get('upcon_title'), 'link'), // TODO: generate link
+                        array($data['prename'] . ' ' . $data['lastname'], Option::get('upcon_title'), UPcon::buildConfirmationLink(PersonRepository::getLastId())), // generate link
                         Option::get('upcon_mail_confirmation')
                     );
                     if ($mail->Send()) {
                         Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
                         Request::redirect(Page::url());
                     } else {
-                        Notification::set('error', __('Die Mail zur Bestätigung deiner Mailadresse konnte nicht versendet werden. Bitte schreib uns an ' . Option::get('upcon_admin_mail') . '!', 'upcon'));
+                        Notification::setNow('error', __('Die Mail zur Bestätigung deiner Mailadresse konnte nicht versendet werden. Bitte schreib uns an ' . Option::get('upcon_admin_mail') . '!', 'upcon'));
                     }
                 }
             }
@@ -249,17 +247,14 @@ class UPcon
                 die();
             }
         }
-
-        // TODO: Request: confirm mail address
-        if (Request::get('upcon_confirm_mail')) {
-            // TODO: check link
-            // set mail confirmed
-            if (PersonRepository::update($id, array('email_confirmed' => 1))) {
-                Notification::set('success', __('Deine Mailadresse wurde erfolgreich bestätigt! Du hast jetzt eine Mail mit allen notwendigen Informationen zu deiner UPcon Anmeldung erhalten.', 'events'));
+        // Request: confirm mail address
+        if (!empty(Request::get('upcon_confirm'))) {
+            // check link
+            if (UPcon::emailIsConfirmed(Request::get('upcon_confirm'))) {
+                Notification::setNow('success', __('Deine Mailadresse wurde erfolgreich bestätigt! Du hast jetzt eine Mail mit allen notwendigen Informationen zu deiner UPcon Anmeldung erhalten.', 'events'));
             } else {
-                Notification::set('error', __('Table->update() returned an error. Person could not be deleted.', 'events'));
+                Notification::setNow('error', __('Deine Mailadresse konnte nicht bestätigt werden. Bitte kontaktiere einen Admin unter ' . Option::get('upcon_admin_mail') . '!', 'events'));
             }
-
         }
 
         // return registration view
@@ -356,6 +351,44 @@ class UPcon
             default:
                 return '';
                 break;
+        }
+    }
+
+
+    /**
+     * builds a link to confirm email address
+     *
+     * @param integer $id of person
+     *
+     * @return string link url
+     *
+     */
+    public static function buildConfirmationLink($id)
+    {
+        $person = PersonRepository::getById($id);
+        $hash = md5($person['timestamp'] . $person['lastname'] . $person['birthday']);
+        $link = Page::url() . '?upcon_confirm=' . $id . '-' . $hash;
+        return $link;
+    }
+
+
+    /**
+     * checks a link to confirm email address
+     *
+     * @param string $hash of clicked link
+     *
+     * @return boolean
+     *
+     */
+    public static function emailIsConfirmed($hash)
+    {
+        list($id, $md5hash) = explode('-', $hash);
+        $person = PersonRepository::getById($id);
+        if (md5($person['timestamp'] . $person['lastname'] . $person['birthday']) == $md5hash) {
+            PersonRepository::update($id, array('email_confirmed' => 1));
+            return true;
+        } else {
+            return false;
         }
     }
 

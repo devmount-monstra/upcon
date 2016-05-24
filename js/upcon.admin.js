@@ -40,11 +40,11 @@ $.monstra.upcon = {
                     dialog.find('#upcon-person-mobile').text(person.mobile);
                     dialog.find('#upcon-person-status').html('<span class="label label-' + statusLabelClass(person.status) + '">' + statusConverter(person.status) + '</span>');
                     dialog.find('#upcon-person-youthgroup').text(person.youthgroup);
-                    dialog.find('#upcon-person-safecom_visited').text(person.safecom_visited ? 'yes' : 'no');
+                    dialog.find('#upcon-person-safecom_visited').text(person.safecom_visited == '1' ? 'yes' : 'no');
                     dialog.find('#upcon-person-arrival').text(person.arrival);
                     dialog.find('#upcon-person-message').text(person.message);
-                    dialog.find('#upcon-person-terms_accepted').text(person.terms_accepted ? 'yes' : 'no');
-                    dialog.find('#upcon-person-email_confirmed').text(person.email_confirmed ? 'yes' : 'no');
+                    dialog.find('#upcon-person-terms_accepted').text(person.terms_accepted == '1' ? 'yes' : 'no');
+                    dialog.find('#upcon-person-email_confirmed').text(person.email_confirmed == '1' ? 'yes' : 'no');
                 }
             });
         });

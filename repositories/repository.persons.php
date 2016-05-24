@@ -111,7 +111,7 @@ class PersonRepository
     public static function getConfirmed()
     {
         $objects = self::getTable();
-        return $objects->select('[deleted=0 and email_confirmed=1]', 'all', null, null, 'timestamp', 'ASC');
+        return $objects->select('[deleted=0 and email_confirmed=1]', 'all', null, null, 'timestamp', 'DESC');
     }
 
 
@@ -124,7 +124,7 @@ class PersonRepository
     public static function getPending()
     {
         $objects = self::getTable();
-        return $objects->select('[deleted=0 and not(email_confirmed=1)]', 'all', null, null, 'timestamp', 'ASC');
+        return $objects->select('[deleted=0 and not(email_confirmed=1)]', 'all', null, null, 'timestamp', 'DESC');
     }
 
 
@@ -137,7 +137,7 @@ class PersonRepository
     public static function getDeleted()
     {
         $objects = self::getTable();
-        return $objects->select('[deleted=1]', 'all', null, null, 'timestamp', 'ASC');
+        return $objects->select('[deleted=1]', 'all', null, null, 'timestamp', 'DESC');
     }
 
 
