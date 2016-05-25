@@ -414,23 +414,43 @@ class UPcon
     }
 
     /**
-     * returns string between two delimiter
+     * returns string between two delimiters
      * http://www.justin-cook.com/wp/2006/03/31/php-parse-a-string-between-two-strings/
      *
-     * @param  string $string full string
      * @param  string $start  tag
      * @param  string $end    tag
+     * @param  string $string full string
      *
      * @return string         text between delimiter
      *
      */
-    function getStringBetween($string, $start, $end){
-        $string = " ".$string;
-        $ini = strpos($string,$start);
-        if ($ini == 0) return "";
+    function getStringBetween($start, $end, $string){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
         $ini += strlen($start);
-        $len = strpos($string,$end,$ini) - $ini;
-        return substr($string,$ini,$len);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
     }
 
+    /**
+     * delete all between two delimiters
+     * http://stackoverflow.com/questions/13031250/php-function-to-delete-all-between-certain-characters-in-string
+     *
+     * @param  string $start  tag
+     * @param  string $end    tag
+     * @param  string $string full string
+     *
+     * @return string         text without content between delimiters
+     *
+     */
+    function deleteAllBetween($start, $end, $string) {
+        $beginningPos = strpos($string, $start);
+        $endPos = strpos($string, $end);
+        if ($beginningPos === false || $endPos === false) {
+            return $string;
+        }
+        $textToDelete = substr($string, $beginningPos, ($endPos + strlen($end)) - $beginningPos);
+        return str_replace($textToDelete, '', $string);
+    }
 }
