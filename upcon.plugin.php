@@ -272,7 +272,7 @@ class UPcon
                 }
                 $mail->Body = str_replace(
                     array('#NAME#', '#TITLE#', '#PRICE#'),
-                    array($person['prename'] . ' ' . $person['lastname'], Option::get('upcon_title'), '69,-'), // generate link
+                    array($person['prename'] . ' ' . $person['lastname'], Option::get('upcon_title'), $person['status'] == UPcon::STATUS_STAFF ? Option::get('upcon_price_staff') : Option::get('upcon_price_normal')), // generate link
                     $body
                 );
                 $mail->Send();
