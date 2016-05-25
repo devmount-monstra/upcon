@@ -272,13 +272,13 @@ class UPcon
                 }
                 $mail->Body = str_replace(
                     array('#NAME#', '#TITLE#', '#PRICE#'),
-                    array($person['prename'] . ' ' . $person['lastname'], Option::get('upcon_title'), '69'), // generate link
+                    array($person['prename'] . ' ' . $person['lastname'], Option::get('upcon_title'), '69,-'), // generate link
                     $body
                 );
-
+                $mail->Send();
                 Notification::setNow('success', __('Deine Mailadresse wurde erfolgreich bestätigt! Du hast jetzt eine Mail mit allen notwendigen Informationen zu deiner UPcon Anmeldung erhalten.', 'events'));
             } else {
-                Notification::setNow('error', __('Deine Mailadresse konnte nicht bestätigt werden. Bitte kontaktiere einen Admin unter ' . Option::get('upcon_admin_mail') . '!', 'events'));
+                Notification::setNow('error', __('Deine Mailadresse konnte nicht bestätigt werden oder wurde bereits bestätigt. Bitte kontaktiere einen Admin unter ' . Option::get('upcon_admin_mail') . '!', 'events'));
             }
             $showform = false;
         }
