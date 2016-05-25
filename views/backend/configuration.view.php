@@ -77,7 +77,27 @@
                         Form::input('upcon_admin_mail', Option::get('upcon_admin_mail'), array('class' => 'form-control'));
                     ?>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
+                    <!-- config price normal -->
+                    <?php echo
+                        Form::label(
+                            'upcon_price_normal',
+                            __('Price normal', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Price for normal participants', 'upcon'))
+                        ) .
+                        Form::input('upcon_price_normal', Option::get('upcon_price_normal'), array('class' => 'form-control'));
+                    ?>
+                </div>
+                <div class="col-md-3">
+                    <!-- config price staff -->
+                    <?php echo
+                        Form::label(
+                            'upcon_price_staff',
+                            __('Price staff', 'upcon'),
+                            array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Price for staff', 'upcon'))
+                        ) .
+                        Form::input('upcon_price_staff', Option::get('upcon_price_staff'), array('class' => 'form-control'));
+                    ?>
                 </div>
             </div>
             <div class="row margin-top-1">

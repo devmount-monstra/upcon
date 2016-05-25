@@ -86,6 +86,8 @@ class UPconAdmin extends Backend
                             Option::update('upcon_mail_info', (string) Request::post('upcon_mail_info'));
                             Option::update('upcon_mail_info_subject', (string) Request::post('upcon_mail_info_subject'));
                             Option::update('upcon_admin_mail', (string) Request::post('upcon_admin_mail'));
+                            Option::update('upcon_price_normal', (string) Request::post('upcon_price_normal'));
+                            Option::update('upcon_price_staff', (string) Request::post('upcon_price_staff'));
                             Notification::set('success', __('Configuration has been saved with success!', 'upcon'));
                             Request::redirect('index.php?id=upcon&action=configuration');
                         }
