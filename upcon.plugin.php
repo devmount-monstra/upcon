@@ -233,7 +233,7 @@ class UPcon
                     $mail->AddAddress($data['email']);
                     $mail->Subject = Option::get('upcon_mail_confirmation_subject');
                     $mail->Body = str_replace(
-                        array('#name#', '#upcon-title#', '#link#'),
+                        array('#NAME#', '#TITLE#', '#LINK#'),
                         array($data['prename'] . ' ' . $data['lastname'], Option::get('upcon_title'), UPcon::buildConfirmationLink(PersonRepository::getLastId())), // generate link
                         Option::get('upcon_mail_confirmation')
                     );
@@ -263,11 +263,17 @@ class UPcon
                 $mail->AddReplyTo(Option::get('upcon_admin_mail'));
                 $mail->AddAddress($person['email']);
                 $mail->Subject = Option::get('upcon_mail_info_subject');
-                // TODO: replace staff/
+                // replace staff markers
+                $body = Option::get('upcon_mail_info');
+                if ($person['status'] == UPcon::STATUS_STAFF) {
+                    $body = str_replace(array('#STAFF#', '#/STAFF#'), '', $body);
+                } else {
+                    $body = UPcon::deleteAllBetween('#STAFF#', '#/STAFF#', $body);
+                }
                 $mail->Body = str_replace(
-                    array('#name#', '#upcon-title#', '#price#'),
+                    array('#NAME#', '#TITLE#', '#PRICE#'),
                     array($person['prename'] . ' ' . $person['lastname'], Option::get('upcon_title'), '69'), // generate link
-                    Option::get('upcon_mail_info')
+                    $body
                 );
 
                 Notification::setNow('success', __('Deine Mailadresse wurde erfolgreich bestätigt! Du hast jetzt eine Mail mit allen notwendigen Informationen zu deiner UPcon Anmeldung erhalten.', 'events'));
