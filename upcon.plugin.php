@@ -231,7 +231,7 @@ class UPcon
                     $mail->SetFrom(Option::get('upcon_admin_mail'));
                     $mail->AddReplyTo(Option::get('upcon_admin_mail'));
                     $mail->AddAddress($data['email']);
-                    $mail->Subject = Option::get('upcon_mail_confirmation_subject');
+                    $mail->Subject = Option::get('upcon_title') . ': ' . Option::get('upcon_mail_confirmation_subject');
                     $mail->Body = str_replace(
                         array('#NAME#', '#TITLE#', '#LINK#'),
                         array($data['prename'] . ' ' . $data['lastname'], Option::get('upcon_title'), UPcon::buildConfirmationLink(PersonRepository::getLastId())), // generate link
@@ -262,7 +262,7 @@ class UPcon
                 $mail->SetFrom(Option::get('upcon_admin_mail'));
                 $mail->AddReplyTo(Option::get('upcon_admin_mail'));
                 $mail->AddAddress($person['email']);
-                $mail->Subject = Option::get('upcon_mail_info_subject');
+                $mail->Subject = Option::get('upcon_title') . ': ' . Option::get('upcon_mail_info_subject');
                 // replace staff markers
                 $body = Option::get('upcon_mail_info');
                 if ($person['status'] == UPcon::STATUS_STAFF) {
