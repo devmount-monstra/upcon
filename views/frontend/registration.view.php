@@ -48,7 +48,7 @@
         </div>
         <div class="2u 4u$(xsmall) stacked small-gap">
             <?php echo
-                Form::select('birthday_y', array_combine(range(2010,1910), range(2010,1910)), $data['birthday_y'], array('required' => 'required'));
+                Form::select('birthday_y', array_combine(range(2004,1910), range(2004,1910)), $data['birthday_y'], array('required' => 'required'));
             ?>
         </div>
         <div class="6u 12u$(xsmall)">
