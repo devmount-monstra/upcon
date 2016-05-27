@@ -122,7 +122,7 @@
         </div>
         <div class="12u$">
             <?php echo
-                Form::label('terms_accepted', __('Ich akzeptiere AGB und Datenschutzbedingungen', 'upcon') . Html::nbsp() . '*') .
+                Form::label('terms_accepted', __('Ich akzeptiere die <a href="https://update.berlin/datenschutz" target="_blank">Datenschutzbedingungen</a>', 'upcon') . Html::nbsp() . '*') .
                 Form::select('terms_accepted', $decision, $data['terms_accepted'], array('required' => 'required'));
             ?>
         </div>
