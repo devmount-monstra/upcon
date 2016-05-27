@@ -1,11 +1,8 @@
 <?php //Debug::dump(UPcon::validateAge('08-06-1998')); ?>
-<!-- anchor -->
-<div id="anmeldung"></div>
 <!-- notifications -->
 <?php if (Notification::get('success')) { ?><div class="notification notification-success"><?php echo Notification::get('success'); ?></div><?php } ?>
 <?php if (Notification::get('error')) { ?><div class="notification notification-error"><?php echo Notification::get('error'); ?></div><?php } ?>
 <!-- plugin content -->
-<?php if ($showform) { ?>
 <div class="upcon-plugin">
     <?php echo
         Form::open(Null, array('role' => 'form')) .
@@ -138,4 +135,3 @@
     <?php echo Form::close(); ?>
 
 </div>
-<?php } ?>

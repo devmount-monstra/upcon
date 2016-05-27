@@ -151,9 +151,6 @@ class UPcon
         // get db table objects
         $persons = new Table('upcon_persons');
 
-        // switch to show formula
-        $showform = true;
-
         // get data
         $data = array(
             'prename' => Request::post('prename'),
@@ -239,7 +236,7 @@ class UPcon
                     );
                     if ($mail->Send()) {
                         Notification::set('success', __('Deine Daten wurden erfolgreich übertragen. Bitte überprüfe deinen Posteingang zur Bestätigung deiner Mailadresse!', 'upcon'));
-                        Request::redirect(Page::url());
+                        Request::redirect(Page::url() . '#notifications');
                     } else {
                         Notification::setNow('error', __('Die Mail zur Bestätigung deiner Mailadresse konnte nicht versendet werden. Bitte schreib uns an ' . Option::get('upcon_admin_mail') . '!', 'upcon'));
                     }
@@ -282,17 +279,16 @@ class UPcon
                     $mail->AddAttachment(UPLOADS . '/upcon/teilnehmererklaerung_minderjaehrig.pdf');
                 }
                 $mail->Send();
-                Notification::setNow('success', __('Deine Mailadresse wurde erfolgreich bestätigt! Du hast jetzt eine Mail mit allen notwendigen Informationen zu deiner UPcon Anmeldung erhalten.', 'events'));
+                Notification::set('success', __('Deine Mailadresse wurde erfolgreich bestätigt! Du hast jetzt eine Mail mit allen notwendigen Informationen zu deiner UPcon Anmeldung erhalten.', 'events'));
+                Request::redirect(Page::url() . '#notifications');
             } else {
                 Notification::setNow('error', __('Deine Mailadresse konnte nicht bestätigt werden oder wurde bereits bestätigt. Bitte kontaktiere einen Admin unter ' . Option::get('upcon_admin_mail') . '!', 'events'));
             }
-            $showform = false;
         }
 
         // return registration view
         return View::factory('upcon/views/frontend/registration')
             ->assign('data', $data)
-            ->assign('showform', $showform)
             ->assign('decision', array(
                 0 => __('Nein', 'upcon'),
                 1 => __('Ja', 'upcon'),
