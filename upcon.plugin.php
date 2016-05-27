@@ -275,6 +275,12 @@ class UPcon
                     array($person['prename'] . ' ' . $person['lastname'], Option::get('upcon_title'), $person['status'] == UPcon::STATUS_STAFF ? Option::get('upcon_price_staff') : Option::get('upcon_price_normal')), // generate link
                     $body
                 );
+                // add attachment depending on age
+                if (UPcon::validateAge($person['birthday'])) {
+                    $mail->AddAttachment(UPLOADS . '/upcon/teilnehmererklaerung.pdf');
+                } else {
+                    $mail->AddAttachment(UPLOADS . '/upcon/teilnehmererklaerung_minderjaehrig.pdf');
+                }
                 $mail->Send();
                 Notification::setNow('success', __('Deine Mailadresse wurde erfolgreich bestätigt! Du hast jetzt eine Mail mit allen notwendigen Informationen zu deiner UPcon Anmeldung erhalten.', 'events'));
             } else {
@@ -419,6 +425,33 @@ class UPcon
         }
     }
 
+
+    /**
+     * validate birthday
+     *
+     * @param  string  $birthday date
+     * @param  integer $age      to validate
+     *
+     * @return boolean           older than age: true
+     *
+     */
+    function validateAge($birthday, $age = 18)
+    {
+        // $birthday can be UNIX_TIMESTAMP or just a string-date.
+        if(is_string($birthday)) {
+            $birthday = strtotime($birthday);
+        }
+
+        // check
+        // 31536000 is the number of seconds in a 365 days year.
+        if(time() - $birthday < $age * 31536000)  {
+            return false;
+        }
+
+        return true;
+    }
+
+
     /**
      * returns string between two delimiters
      * http://www.justin-cook.com/wp/2006/03/31/php-parse-a-string-between-two-strings/
@@ -430,7 +463,8 @@ class UPcon
      * @return string         text between delimiter
      *
      */
-    function getStringBetween($start, $end, $string){
+    function getStringBetween($start, $end, $string)
+    {
         $string = ' ' . $string;
         $ini = strpos($string, $start);
         if ($ini == 0) return '';
@@ -438,6 +472,7 @@ class UPcon
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
     }
+
 
     /**
      * delete all between two delimiters
@@ -450,7 +485,8 @@ class UPcon
      * @return string         text without content between delimiters
      *
      */
-    function deleteAllBetween($start, $end, $string) {
+    function deleteAllBetween($start, $end, $string)
+    {
         $beginningPos = strpos($string, $start);
         $endPos = strpos($string, $end);
         if ($beginningPos === false || $endPos === false) {

@@ -1,4 +1,4 @@
-<?php //Debug::dump($debug); ?>
+<?php //Debug::dump(UPcon::validateAge('08-06-1998')); ?>
 <!-- anchor -->
 <div id="anmeldung"></div>
 <!-- notifications -->
