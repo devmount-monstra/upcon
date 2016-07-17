@@ -170,6 +170,21 @@
         <div class="col-md-6">
             <?php echo Html::heading(__('Export', 'upcon'), 3); ?>
             <p>Coming soon...</p>
+            <?php echo
+                Form::open() .
+                Form::hidden('csrf', Security::token()) .
+                HTML::br();
+            ?>
+                <button
+                    type="submit"
+                    name="upcon_export"
+                    class="btn btn-primary"
+                    value="1"
+                    title="<?php echo __('Export', 'upcon'); ?>"
+                >
+                    <?php echo __('Export', 'upcon'); ?>
+                </button>
+            <?php echo Form::close(); ?>
         </div>
     </div>
 </div>

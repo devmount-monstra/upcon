@@ -28,6 +28,7 @@ Action::add('admin_pre_render','UPconAdmin::_getAjaxData');
 
 // register repository classes
 require_once 'repositories/repository.persons.php';
+// require_once 'lib/PHPExcel/Classes/PHPExcel.php';
 
 /**
  * UPcon class
@@ -96,6 +97,18 @@ class UPconAdmin extends Backend
                             die();
                         }
                     }
+                    // Request: export
+                    if (Request::post('upcon_export')) {
+                        if (Security::check(Request::post('csrf'))) {
+                            UPconAdmin::export();
+                            Notification::set('success', __('Excel file has been created!', 'upcon'));
+                            Request::redirect('index.php?id=upcon&action=configuration');
+                        }
+                        else {
+                            Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'upcon'));
+                            die();
+                        }
+                    }
                     // Display configuration view
                     View::factory('upcon/views/backend/configuration')
                         ->display();
@@ -115,6 +128,45 @@ class UPconAdmin extends Backend
                 ->assign('persons_confirmed', PersonRepository::getConfirmed())
                 ->display();
         }
+    }
+
+
+    /**
+     * upcon export function
+     *
+     */
+    private static function export()
+    {
+        // // set excel configuration
+        // PHPExcel_Settings::setLocale('de_de');
+        // $excel = new PHPExcel();
+        // $excel->getProperties()->setCreator('UPcon Plugin');
+        // $excel->getProperties()->setLastModifiedBy('UPcon Plugin');
+        // $excel->getProperties()->setTitle(Option::get('upcon_title'));
+        // $excel->getProperties()->setSubject(Option::get('upcon_title'));
+        // $excel->getProperties()->setDescription('Anmeldungen zu "' . Option::get('upcon_title') . '"');
+        // $excel->getProperties()->setKeywords('upcon update convention');
+        // $excel->getProperties()->setCategory('events');
+
+        // // create sheet
+        // $excel->createSheet();
+
+        // // get all persons to be exported
+        // $arrayData = array(
+        //     array(NULL, 2010, 2011, 2012),
+        //     array('Q1',   12,   15,   21),
+        //     array('Q2',   56,   73,   86),
+        //     array('Q3',   52,   61,   69),
+        //     array('Q4',   30,   32,    0),
+        // );
+        // $excel->getActiveSheet()
+        //     ->fromArray(
+        //         $arrayData,  // The data to set
+        //         NULL,        // Array values with this value will not be set
+        //         'C3'         // Top left coordinate of the worksheet range where we want to set these values (default is A1)
+        //     );
+        // $objWriter = PHPExcel_IOFactory::createWriter($excel, "Excel2007");
+        // $objWriter->save("test.xlsx");
     }
 
 }
