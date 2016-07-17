@@ -296,13 +296,13 @@ class UPcon
             ->assign('gender', array(
                 'f' => __('weiblich', 'upcon'),
                 'm' => __('männlich', 'upcon'),
-                'o' => __('andere', 'upcon'),
+                'o' => __('anderes', 'upcon'),
             ))
             ->assign('status', array(
-                UPcon::STATUS_NORMAL => __('Teilnehmer', 'upcon'),
+                UPcon::STATUS_NORMAL => __('TeilnehmerIn', 'upcon'),
                 // UPcon::STATUS_EARLY => __('Frühbucher', 'upcon'),
                 // UPcon::STATUS_BUJU => __('BUJU', 'upcon'),
-                UPcon::STATUS_STAFF => __('Mitarbeiter', 'upcon'),
+                UPcon::STATUS_STAFF => __('MitarbeiterIn', 'upcon'),
                 UPcon::STATUS_VISITOR => __('Tagesgast', 'upcon'),
             ))
             ->render();
