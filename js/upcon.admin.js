@@ -32,7 +32,7 @@ $.monstra.upcon = {
                     dialog.find('#upcon-person-upcon_id').text(person.upcon_id);
                     dialog.find('#upcon-person-prename').text(person.prename);
                     dialog.find('#upcon-person-lastname').text(person.lastname);
-                    dialog.find('#upcon-person-gender').text(person.gender == 'm' ? 'male' : 'female');
+                    dialog.find('#upcon-person-gender').text(person.gender == 'm' ? 'male' : person.gender == 'f' ? 'female' : 'other');
                     dialog.find('#upcon-person-birthday').text(person.birthday);
                     dialog.find('#upcon-person-email').text(person.email);
                     dialog.find('#upcon-person-address').text(person.address);

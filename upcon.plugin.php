@@ -296,6 +296,7 @@ class UPcon
             ->assign('gender', array(
                 'f' => __('weiblich', 'upcon'),
                 'm' => __('männlich', 'upcon'),
+                'o' => __('andere', 'upcon'),
             ))
             ->assign('status', array(
                 UPcon::STATUS_NORMAL => __('Teilnehmer', 'upcon'),
