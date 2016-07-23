@@ -117,7 +117,7 @@
         <div class="12u$">
             <?php echo
                 Form::label('message', __('Hinweis', 'upcon')) .
-                '<span style="font-size:9pt;line-height:9pt;">Bitte gebt uns hier auch Bescheid, falls ihr am Freitagabend (30.09.) bei der Holy Spirit Night (HSN) seid, damit wir wissen, dass ihr später kommt. Für alle, die an diesem Abend beim C-Campus sind, um mit Jesus Culture zu worshippen, bieten wir an, sich dort zu treffen und dann nach dem Konzert gemeinsam nach Schöneberg zur UPcon zu fahren. Denkt dran, dass ihr als Teil der UPCon nicht automatisch eine Karte für die HSN habt.</span>' .
+                '<span style="font-size:9pt;line-height: 14pt;display:inline-block;">Bitte gebt uns hier auch Bescheid, falls ihr am Freitagabend (30.09.) bei der Holy Spirit Night (HSN) seid, damit wir wissen, dass ihr später kommt. Für alle, die an diesem Abend beim C-Campus sind, um mit Jesus Culture zu worshippen, bieten wir an, sich dort zu treffen und dann nach dem Konzert gemeinsam nach Schöneberg zur UPcon zu fahren. Denkt dran, dass ihr als Teil der UPCon nicht automatisch eine Karte für die HSN habt.</span>' .
                 Form::textarea('message', $data['message'], array('class' => 'input-xxlarge', 'placeholder' => __('Essen, Sport, Krankheiten, Holy Spirit Night...', 'upcon')));
             ?>
         </div>
