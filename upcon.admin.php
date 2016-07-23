@@ -108,7 +108,7 @@ class UPconAdmin extends Backend
                     // Request: export
                     if (Request::post('upcon_export')) {
                         if (Security::check(Request::post('csrf'))) {
-                            UPconAdmin::export();
+                            UPconAdmin::export(Request::post('upcon_export'));
                             Notification::set('success', __('Excel file has been created!', 'upcon'));
                         }
                         else {
@@ -141,32 +141,26 @@ class UPconAdmin extends Backend
     /**
      * upcon export function
      *
+     * @param: $type  string  [xlsx, csv, ods]
+     *
      */
-    private static function export()
+    private static function export($type = 'xlsx')
     {
-        $writer = WriterFactory::create(Type::XLSX); // for XLSX files
-        // $writer = WriterFactory::create(Type::CSV); // for CSV files
-        // $writer = WriterFactory::create(Type::ODS); // for ODS files
+        // check file export type
+        switch ($type) {
+            case 'xlsx':
+            default:
+                $writer = WriterFactory::create(Type::XLSX); // for XLSX files
+                break;
+            case 'csv':
+                $writer = WriterFactory::create(Type::CSV); // for CSV files
+                break;
+            case 'ods':
+                $writer = WriterFactory::create(Type::ODS); // for ODS files
+                break;
+        }
 
-        $writer->openToBrowser('test.xlsx'); // stream data directly to the browser
-        // $writer->openToBrowser('test.csv'); // stream data directly to the browser
-
-// 'timestamp':'Datum'
-// 'prename':'Vorname'
-// 'lastname':'Nachname'
-// 'gender':'Geschlecht'
-// 'birthday':'Geburtstag'
-// 'email':'E-Mail'
-// 'mobile':'Handy'
-// 'address':'Adresse'
-// 'zip':'PLZ'
-// 'city':'Stadt'
-// 'country':'Land'
-// 'status':'Status'
-// 'youthgroup':'Jugendgruppe'
-// 'safecom_visited':'Sichere Gemeinde besucht'
-// 'arrival':'Ankuft'
-// 'message':'Nachricht'
+        $writer->openToBrowser('test.' . $type); // stream data directly to the browser
 
         // build borders
         $border = (new BorderBuilder())
@@ -182,7 +176,9 @@ class UPconAdmin extends Backend
            ->setBorder($border)
            ->build();
 
-        // add header
+        // confirmed
+        $writer->addRows([['Bestätigte Personen:'],[' ']]);
+        // add header for confirmed persons
         $writer->addRowWithStyle(
             [
                 'Datum',
@@ -208,20 +204,20 @@ class UPconAdmin extends Backend
         foreach (PersonRepository::getConfirmed() as $person) {
             $writer->addRow(
                 [
-                    $person['timestamp'],
+                    date('d.m.Y H:i:s', $person['timestamp']),
                     $person['prename'],
                     $person['lastname'],
-                    $person['gender'],
-                    $person['birthday'],
+                    $person['gender'] == 'm' ? 'männlich' : ($person['gender'] == 'f' ? 'weiblich' : 'anderes'),
+                    str_replace('-', '.', $person['birthday']),
                     $person['email'],
                     $person['mobile'],
                     $person['address'],
                     $person['zip'],
                     $person['city'],
                     $person['country'],
-                    $person['status'],
+                    PersonRepository::statusIdToLabel($person['status']),
                     $person['youthgroup'],
-                    $person['safecom_visited'],
+                    $person['safecom_visited'] == '1' ? 'Ja' : 'Nein',
                     $person['arrival'],
                     $person['message']
                 ]

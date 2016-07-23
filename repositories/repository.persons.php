@@ -168,4 +168,25 @@ class PersonRepository
         return $person['email_confirmed'] == '1' ? 'confirmed' : 'pending';
     }
 
+
+    /**
+     * Returns person status label
+     *
+     * @param int id
+     *
+     * @return string status
+     *
+     */
+    public static function statusIdToLabel($id)
+    {
+        $states = array(
+            '1' => 'Normal',
+            '2' => 'Frühbucher',
+            '3' => 'BUJU',
+            '4' => 'Mitarbeiter',
+            '5' => 'Tagesgast',
+        );
+        return $states[$id];
+    }
+
 }

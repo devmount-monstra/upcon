@@ -179,10 +179,28 @@
                     type="submit"
                     name="upcon_export"
                     class="btn btn-primary"
-                    value="1"
-                    title="<?php echo __('Export', 'upcon'); ?>"
+                    value="xlsx"
+                    title="<?php echo __('Export XLSX', 'upcon'); ?>"
                 >
-                    <?php echo __('Export', 'upcon'); ?>
+                    <?php echo __('XLSX', 'upcon'); ?>
+                </button>
+                <button
+                    type="submit"
+                    name="upcon_export"
+                    class="btn btn-primary"
+                    value="csv"
+                    title="<?php echo __('Export CSV', 'upcon'); ?>"
+                >
+                    <?php echo __('CSV', 'upcon'); ?>
+                </button>
+                <button
+                    type="submit"
+                    name="upcon_export"
+                    class="btn btn-primary"
+                    value="ods"
+                    title="<?php echo __('Export ODS', 'upcon'); ?>"
+                >
+                    <?php echo __('ODS', 'upcon'); ?>
                 </button>
             <?php echo Form::close(); ?>
         </div>
