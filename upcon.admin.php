@@ -28,7 +28,15 @@ Action::add('admin_pre_render','UPconAdmin::_getAjaxData');
 
 // register repository classes
 require_once 'repositories/repository.persons.php';
-// require_once 'lib/PHPExcel/Classes/PHPExcel.php';
+
+// require excel export classes
+require_once 'lib/Spout/Autoloader/autoload.php';
+use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Common\Type;
+use Box\Spout\Writer\Style\StyleBuilder;
+use Box\Spout\Writer\Style\Color;
+use Box\Spout\Writer\Style\Border;
+use Box\Spout\Writer\Style\BorderBuilder;
 
 /**
  * UPcon class
@@ -102,7 +110,6 @@ class UPconAdmin extends Backend
                         if (Security::check(Request::post('csrf'))) {
                             UPconAdmin::export();
                             Notification::set('success', __('Excel file has been created!', 'upcon'));
-                            Request::redirect('index.php?id=upcon&action=configuration');
                         }
                         else {
                             Notification::set('error', __('Request was denied. Invalid security token. Please refresh the page and try again.', 'upcon'));
@@ -137,36 +144,94 @@ class UPconAdmin extends Backend
      */
     private static function export()
     {
-        // // set excel configuration
-        // PHPExcel_Settings::setLocale('de_de');
-        // $excel = new PHPExcel();
-        // $excel->getProperties()->setCreator('UPcon Plugin');
-        // $excel->getProperties()->setLastModifiedBy('UPcon Plugin');
-        // $excel->getProperties()->setTitle(Option::get('upcon_title'));
-        // $excel->getProperties()->setSubject(Option::get('upcon_title'));
-        // $excel->getProperties()->setDescription('Anmeldungen zu "' . Option::get('upcon_title') . '"');
-        // $excel->getProperties()->setKeywords('upcon update convention');
-        // $excel->getProperties()->setCategory('events');
+        $writer = WriterFactory::create(Type::XLSX); // for XLSX files
+        // $writer = WriterFactory::create(Type::CSV); // for CSV files
+        // $writer = WriterFactory::create(Type::ODS); // for ODS files
 
-        // // create sheet
-        // $excel->createSheet();
+        $writer->openToBrowser('test.xlsx'); // stream data directly to the browser
+        // $writer->openToBrowser('test.csv'); // stream data directly to the browser
 
-        // // get all persons to be exported
-        // $arrayData = array(
-        //     array(NULL, 2010, 2011, 2012),
-        //     array('Q1',   12,   15,   21),
-        //     array('Q2',   56,   73,   86),
-        //     array('Q3',   52,   61,   69),
-        //     array('Q4',   30,   32,    0),
-        // );
-        // $excel->getActiveSheet()
-        //     ->fromArray(
-        //         $arrayData,  // The data to set
-        //         NULL,        // Array values with this value will not be set
-        //         'C3'         // Top left coordinate of the worksheet range where we want to set these values (default is A1)
-        //     );
-        // $objWriter = PHPExcel_IOFactory::createWriter($excel, "Excel2007");
-        // $objWriter->save("test.xlsx");
+// 'timestamp':'Datum'
+// 'prename':'Vorname'
+// 'lastname':'Nachname'
+// 'gender':'Geschlecht'
+// 'birthday':'Geburtstag'
+// 'email':'E-Mail'
+// 'mobile':'Handy'
+// 'address':'Adresse'
+// 'zip':'PLZ'
+// 'city':'Stadt'
+// 'country':'Land'
+// 'status':'Status'
+// 'youthgroup':'Jugendgruppe'
+// 'safecom_visited':'Sichere Gemeinde besucht'
+// 'arrival':'Ankuft'
+// 'message':'Nachricht'
+
+        // build borders
+        $border = (new BorderBuilder())
+            ->setBorderBottom(Color::BLACK, Border::WIDTH_THIN, Border::STYLE_SOLID)
+            ->build();
+
+        // build styles
+        $style_th = (new StyleBuilder())
+           ->setFontBold()
+           ->setFontSize(12)
+           ->setFontColor(Color::rgb(110, 70, 150))
+           // ->setShouldWrapText()
+           ->setBorder($border)
+           ->build();
+
+        // add header
+        $writer->addRowWithStyle(
+            [
+                'Datum',
+                'Vorname',
+                'Nachname',
+                'Geschlecht',
+                'Geburtstag',
+                'E-Mail',
+                'Handy',
+                'Adresse',
+                'PLZ',
+                'Stadt',
+                'Land',
+                'Status',
+                'Jugendgruppe',
+                'Sichere Gemeinde besucht',
+                'Ankuft',
+                'Nachricht'
+            ],
+            $style_th
+        );
+        // add rows for confirmed persons
+        foreach (PersonRepository::getConfirmed() as $person) {
+            $writer->addRow(
+                [
+                    $person['timestamp'],
+                    $person['prename'],
+                    $person['lastname'],
+                    $person['gender'],
+                    $person['birthday'],
+                    $person['email'],
+                    $person['mobile'],
+                    $person['address'],
+                    $person['zip'],
+                    $person['city'],
+                    $person['country'],
+                    $person['status'],
+                    $person['youthgroup'],
+                    $person['safecom_visited'],
+                    $person['arrival'],
+                    $person['message']
+                ]
+            );
+        }
+
+        $writer->close();
+
+        // prevent streaming more data
+        Request::shutdown();
     }
 
 }
