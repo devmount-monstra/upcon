@@ -34,7 +34,7 @@ Codesnippet for templates:
 This Plugin is distributed under [MIT-License](http://opensource.org/licenses/mit-license.html).
 
 ## Sources
-No external sources in use.
+[Spout](https://github.com/box/spout): a PHP library to read and write spreadsheet files (CSV, XLSX and ODS)
 
 ---
 created by [devmount ![devmount logo](http://media.devmount.de/devmount_small_dark.png)](http://devmount.de)

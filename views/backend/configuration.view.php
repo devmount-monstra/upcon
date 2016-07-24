@@ -61,7 +61,7 @@
                             __('UPcon status', 'upcon'),
                             array('data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Use this switch to activate the configured UPdate Convention', 'upcon'))
                         ) .
-                        Form::select('upcon_active', array(0 => __("Inactive", 'upcon'), 1 => __('Active', 'upcon')), Null, array('class' => 'form-control'));
+                        Form::select('upcon_active', array(0 => __('Inactive', 'upcon'), 1 => __('Active', 'upcon')), Option::get('upcon_active'), array('class' => 'form-control'));
                     ?>
                 </div>
             </div>
@@ -169,7 +169,7 @@
         </div>
         <div class="col-md-6">
             <?php echo Html::heading(__('Export', 'upcon'), 3); ?>
-            <p>Coming soon...</p>
+            <p>The list of already confirmed persons can be exported here. Choose, if you want Excel Open XML, CSV or Open Document file format:</p>
             <?php echo
                 Form::open() .
                 Form::hidden('csrf', Security::token()) .
