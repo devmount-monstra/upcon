@@ -1,7 +1,7 @@
 UPcon
 =====
 
-A plugin to provide a form for registration, mail address confirmationm, registration confirmation for UPcon, a convention organized by UPdate.
+A plugin to provide a form for registration, mail address confirmationm, registration confirmation for UPcon, a convention organized by UPdate. It's specialized on this event (e.g. the person db fields), but you can modify it for your own needs.
 
 ## Version
 #### [**v1.0**](https://github.com/devmount-monstra/upcon/releases/tag/v1.0) - 2016-04-29
@@ -18,17 +18,29 @@ Here is a [list of all versions](https://github.com/devmount-monstra/upcon/relea
 ## Usage
 Shortcode for content pages:
 
-    {upcon show="registration" title="UPcon 2016" id="upcon16"}
+    {upcon show="registration"}
 
 Codesnippet for templates:
 
-    <?php UPcon::registration('The answer to life, the universe and everything?', '42'); ?>
+    <?php UPcon::registration(); ?>
 
-## Options
-| option         | type     | description                                                 |
-|----------------|----------|-------------------------------------------------------------|
-| Slide duration | `int`    | How many milliseconds the sliding animation should take     |
-| Slide easing   | `string` | Easing type for the sliding animation: `swing` or `linear`  |
+## Configuration
+#### Options
+| option                     | type     | description                                                                                     |
+|----------------------------|----------|-------------------------------------------------------------------------------------------------|
+| UPcon Title                | `string` | Title of the event (used e.g. for emails)                                                       |
+| UPcon ID                   | `string` | Event ID used to assign persons to this event                                                   |
+| UPcon Status               | `string` | Switch event active or inactive (not implemented atm)                                           |
+| Admin email address        | `string` | Sender mail address                                                                             |
+| Price normal               | `string` | Price for participants                                                                          |
+| Price staff                | `string` | Price for staff members                                                                         |
+| Confirmation email subject | `string` | Subject for confirmation mail                                                                   |
+| Confirmation email content | `string` | Content for confirmation mail (possible markers: #NAME#, #TITLE#, #TITLE#)                      |
+| Information email subject  | `string` | Subject for information mail                                                                    |
+| Information email content  | `string` | Content for information mail (possible markers: #NAME#, #TITLE#, #PRICE#, #STAFF# ... #/STAFF#) |
+
+#### Export
+The list of already confirmed persons can be exported. Excel Open XML, CSV or Open Document file format can be chosen.
 
 ## License
 This Plugin is distributed under [MIT-License](http://opensource.org/licenses/mit-license.html).

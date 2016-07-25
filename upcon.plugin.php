@@ -107,7 +107,7 @@ class UPcon
     {
         switch ($attributes['show']) {
             case 'registration':
-                return UPcon::registration($attributes['id'], $attributes['title']);
+                return UPcon::registration();
                 break;
 
             default:
