@@ -4,14 +4,14 @@
 defined('MONSTRA_ACCESS') or die('No direct script access.');
 
 /**
- *	UPcon plugin admin
+ *  UPcon plugin admin
  *
  *  Provides a list of all registered records and some statistics
  *
- *	@package    Monstra
+ *  @package    Monstra
  *  @subpackage Plugins
- *	@author     Andreas Müller | devmount <mail@devmount.de>
- *	@license    MIT
+ *  @author     Andreas Müller | devmount <mail@devmount.de>
+ *  @license    MIT
  *  @link       https://github.com/devmount-monstra/upcon
  *
  */
@@ -160,7 +160,7 @@ class UPconAdmin extends Backend
                 break;
         }
 
-        $writer->openToBrowser('test.' . $type); // stream data directly to the browser
+        $writer->openToBrowser(date("Ymd-His") . '_' . Option::get('upcon_id') . '.' . $type); // stream data directly to the browser
 
         // build borders
         $border = (new BorderBuilder())
