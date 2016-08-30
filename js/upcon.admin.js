@@ -4,7 +4,7 @@ if (typeof $.monstra == 'undefined') $.monstra = {};
 $.monstra.upcon = {
 
     /* initialize document ready functions */
-	init: function(){
+    init: function(){
         // activate current tab on page reload
         $.monstra.upcon.handleTabLinks();
 

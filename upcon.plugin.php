@@ -4,16 +4,16 @@
 defined('MONSTRA_ACCESS') or die('No direct script access.');
 
 /**
- *	UPcon plugin
+ *  UPcon plugin
  *
  *  A plugin to provide a form for registration, mail address confirmationm,
  *  registration confirmation for UPcon, a convention organized by UPdate.
  *
- *	@package    Monstra
+ *  @package    Monstra
  *  @subpackage Plugins
- *	@author     Andreas Müller | devmount <mail@devmount.de>
- *	@license    MIT
- *	@version    1.0
+ *  @author     Andreas Müller | devmount <mail@devmount.de>
+ *  @license    MIT
+ *  @version    1.0
  *  @link       https://github.com/devmount-monstra/upcon
  *
  */

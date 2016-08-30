@@ -5,29 +5,29 @@ defined('MONSTRA_ACCESS') or die('No direct script access.');
 
 // Initialize Database
 Table::create(
-	'upcon_persons',
-	array(
-		'timestamp',
-		'deleted',
-		'upcon_id',
-		'prename',
-		'lastname',
-		'gender',
-		'birthday',
-		'email',
-		'address',
-		'zip',
-		'city',
-		'country',
-		'mobile',
-		'status',
-		'youthgroup',
-		'safecom_visited',
-		'arrival',
-		'message',
-		'terms_accepted',
-		'email_confirmed',
-	)
+    'upcon_persons',
+    array(
+        'timestamp',
+        'deleted',
+        'upcon_id',
+        'prename',
+        'lastname',
+        'gender',
+        'birthday',
+        'email',
+        'address',
+        'zip',
+        'city',
+        'country',
+        'mobile',
+        'status',
+        'youthgroup',
+        'safecom_visited',
+        'arrival',
+        'message',
+        'terms_accepted',
+        'email_confirmed',
+    )
 );
 
 // Add Options
