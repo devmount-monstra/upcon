@@ -40,3 +40,11 @@
 .upcon-admin .tab-pane table form {
     display: inline-block;
 }
+
+/* reset modal width for documentation */
+@media (min-width: 768px) {
+    #modal-documentation .modal-dialog {
+        width: 70%;
+        margin: 30px auto;
+    }
+}
